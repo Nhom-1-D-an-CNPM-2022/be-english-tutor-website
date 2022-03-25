@@ -1,5 +1,8 @@
+import userRoutes from '../components/users/routes';
+
 const startRoutes = (app) => {
   // routes
+  app.use('/users', userRoutes);
 
   //404
   app.use((req, res, next) => {
