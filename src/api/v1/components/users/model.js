@@ -39,6 +39,9 @@ const userSchema = new mongoose.Schema(
     googleId: {
       type: String,
     },
+    facebookId: {
+      type: String,
+    },
   },
   {
     timestamps: true,
@@ -50,6 +53,7 @@ userSchema.methods.toJSON = function () {
   delete userObject.password;
   delete userObject.secretOtp;
   delete userObject.googleId;
+  delete userObject.facebookId;
   return userObject;
 };
 
