@@ -8,13 +8,11 @@ const userSchema = new mongoose.Schema(
   {
     email: {
       type: String,
-      required: true,
       trim: true,
       index: true,
     },
     password: {
       type: String,
-      required: true,
     },
     fullname: {
       type: String,
@@ -71,6 +69,33 @@ userSchema.methods.generateToken = function () {
     { expiresIn: '1h' }
   );
   return token;
+};
+
+userSchema.statics.generateToken = function (user) {
+  const accessToken = jwt.sign(
+    {
+      data: {
+        _id: user._id.toString(),
+        email: user.email,
+        isVerified: user.isVerified,
+      },
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '1h' }
+  );
+
+  const refreshToken = jwt.sign(
+    {
+      data: {
+        _id: user._id.toString(),
+        email: user.email,
+        isVerified: user.isVerified,
+      },
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '30d' }
+  );
+  return {accessToken, refreshToken};
 };
 
 userSchema.pre('save', async function (next) {
