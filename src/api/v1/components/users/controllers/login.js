@@ -12,13 +12,19 @@ const login = async (req, res) => {
     }
 
     if(await bcrypt.compare(password, userFoundByEmail.password)) {
-        res.status(200).send({
-            "user": userFoundByEmail,
-            "tokens": {
-                "access": "",
-                "refresh": ""
-            }
-        });
+      const {accessToken, refreshToken} = User.generateToken(userFoundByEmail);
+      res.cookie(process.env.REFRESH_TOKEN_KEY, refreshToken, {
+        httpOnly: true,
+        secure: false,
+        path: "/",
+        sameSite: "strict",
+      });
+      console.log(refreshToken);
+
+      res.status(200).send({
+          "user": userFoundByEmail,
+          "accessToken": accessToken,
+      });
     }
     else {
         throw new Error('Password is incorrect');
