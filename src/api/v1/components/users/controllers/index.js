@@ -1,11 +1,13 @@
 import register from './register';
-import registerGoogle from './registerGoogle';
 import login from './login';
 import loginFacebook from './loginfacebook';
+import loginGoogle from './loginGoogle';
+import refreshToken from './refreshToken';
 
 export default {
   register,
-  registerGoogle,
   login,
   loginFacebook,
+  loginGoogle,
+  refreshToken,
 };
