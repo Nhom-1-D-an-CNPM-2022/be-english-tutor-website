@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const facebookAccountVerification = async (accessToken, userId) => {
+const facebookAccountVerification = async (accessToken) => {
   try {
-    let urlGraphFacebook = `https://graph.facebook.com/v13.0/${userId}/?fields=id,name,email&access_token=${accessToken}`
+    let urlGraphFacebook = `https://graph.facebook.com/v13.0/me/?fields=id,name,email&access_token=${accessToken}`
     const response = await axios.get(urlGraphFacebook);
     const accountInformation = response.data;
 
