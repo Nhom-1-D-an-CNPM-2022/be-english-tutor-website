@@ -3,7 +3,7 @@ import parseErrorIntoMessage from '../../../helpers/parseErrorIntoMessage';
 import googleAccountVerification from '../helpers/googleAccountVerification';
 import generateUUID from '../../../helpers/generateUUID';
 
-const registerGoogle = async (req, res) => {
+const loginGoogle = async (req, res) => {
   const { tokenId } = req.body;
   try {
     if (!tokenId) {
@@ -54,4 +54,4 @@ const registerGoogle = async (req, res) => {
   }
 };
 
-export default registerGoogle;
+export default loginGoogle;
