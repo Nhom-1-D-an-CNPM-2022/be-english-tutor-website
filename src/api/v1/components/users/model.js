@@ -40,6 +40,11 @@ const userSchema = new mongoose.Schema(
     facebookId: {
       type: String,
     },
+    type: {
+      type: String,
+      enum: ['tutor', 'student'],
+      default: 'student',
+    },
   },
   {
     timestamps: true,
@@ -95,7 +100,7 @@ userSchema.statics.generateToken = function (user) {
     process.env.JWT_SECRET,
     { expiresIn: '30d' }
   );
-  return {accessToken, refreshToken};
+  return { accessToken, refreshToken };
 };
 
 userSchema.pre('save', async function (next) {
