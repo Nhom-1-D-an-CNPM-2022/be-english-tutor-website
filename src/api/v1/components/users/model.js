@@ -45,6 +45,15 @@ const userSchema = new mongoose.Schema(
       enum: ['tutor', 'student'],
       default: 'student',
     },
+    profession: {
+      type: String,
+    },
+    introduction: {
+      type: String,
+    },
+    interests: {
+      type: String,
+    },
   },
   {
     timestamps: true,
