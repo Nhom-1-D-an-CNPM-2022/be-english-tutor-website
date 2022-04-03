@@ -4,7 +4,6 @@ import userControllers from './controllers';
 const userRoutes = express.Router();
 
 //======================== GET ========================
-userRoutes.get('/tutors/search', userControllers.searchAllTutors);
 //======================== POST ========================
 userRoutes.post('/register', userControllers.register);
 userRoutes.post('/login/google', userControllers.loginGoogle);

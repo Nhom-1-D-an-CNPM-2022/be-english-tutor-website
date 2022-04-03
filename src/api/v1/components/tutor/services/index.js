@@ -1,7 +1,7 @@
 import searchAllTutors from './searchAllTutors';
 
-const userServices = {
+const tutorServices = {
   searchAllTutors,
 };
 
-export default userServices;
+export default tutorServices;

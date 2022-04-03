@@ -1,9 +1,10 @@
-import userServices from '../services';
+import tutorServices from '../services';
 
 const searchAllTutors = async (req, res) => {
   const { skip, limit, query, sortBy, order } = req.query;
   try {
-    const tutors = await userServices.searchAllTutors({
+    const tutors = await tutorServices.searchAllTutors({
+      search: query,
       skip,
       limit,
       query,

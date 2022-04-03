@@ -1,4 +1,4 @@
-import User from '../model';
+import Tutor from '../model';
 import parseSearchString from '../../../helpers/queries/parseSearchString';
 import parseSortQuery from '../../../helpers/queries/parseSortQuery';
 import parseSkipAndLimit from '../../../helpers/queries/parseSkipAndLimit';
@@ -15,16 +15,10 @@ const searchAllTutors = async (options) => {
   // sort
   const sortObject = parseSortQuery(options.sortBy, options.order);
 
-  const tutors = await User.find(
-    {
-      $and: [{ type: 'tutor' }, { ...searchObject }],
-    },
-    null,
-    {
-      ...parseSkipAndLimit(options),
-      sort: sortObject,
-    }
-  );
+  const tutors = await Tutor.find(searchObject, null, {
+    ...parseSkipAndLimit(options),
+    sort: sortObject,
+  });
 
   // return data
   return tutors;
