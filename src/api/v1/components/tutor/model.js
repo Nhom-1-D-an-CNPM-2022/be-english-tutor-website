@@ -1,10 +1,7 @@
 import mongoose from "mongoose";
 
 const tutorSchema = new mongoose.Schema({
-  userId: {
-    type: String,
-    unique: true,
-  },
+  introduce: String,
   education: String,
   experience: String,
   profession: String,

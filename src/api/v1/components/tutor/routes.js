@@ -4,7 +4,7 @@ import tutorController from "./controllers";
 const tutorRoutes = express.Router();
 
 //======================== GET ========================
-tutorController.get("/", tutorController.getListTutors);
+tutorRoutes.get("/", tutorController.getListTutors);
 //======================== POST ========================
 //======================== PUT ========================
 //======================== DELETE ========================
