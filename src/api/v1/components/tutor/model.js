@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const tutorSchema = new mongoose.Schema({
-  introduce: String,
+  introduction: String,
   education: String,
   experience: String,
   profession: String,
@@ -9,6 +9,12 @@ const tutorSchema = new mongoose.Schema({
   languages: String,
   teachingStyles: String,
   certificates: String,
+  interests: {
+    type: String,
+  },
+  fullname: {
+    type: String,
+  },
 });
 
-export default mongoose.model("Tutor", tutorSchema);
+export default mongoose.model('Tutor', tutorSchema);
