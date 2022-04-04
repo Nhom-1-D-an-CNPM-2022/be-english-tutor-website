@@ -15,9 +15,8 @@ const getListTutors = (req, res) => {
     if (err) {
       return res.status(500).json({ message: e });
     }
-
     let results = tutors.map(async (tutor) => {
-      const user = await User.findOne({ _id: tutor._id });
+      const user = await User.findOne({ _id: tutor.userId });
       if (user !== null) {
         const today = new Date();
         const currentDay =
@@ -31,7 +30,7 @@ const getListTutors = (req, res) => {
         return {
           fullname: user.fullname,
           hometown: user.hometown,
-          introduce: tutor.introduce,
+          introduction: tutor.introduction,
           ageOfAccount: ageOfAccount,
         };
       }

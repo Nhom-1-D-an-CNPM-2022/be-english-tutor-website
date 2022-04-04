@@ -1,6 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const tutorSchema = new mongoose.Schema({
+  userId: mongoose.Schema.Types.ObjectId,
   introduction: String,
   education: String,
   experience: String,
@@ -17,4 +18,4 @@ const tutorSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model('Tutor', tutorSchema);
+export default mongoose.model("Tutor", tutorSchema);
