@@ -36,13 +36,12 @@ workflows:
             branches:
               ignore:
                 - gh-pages
-      - build:
+     - build:
           requires:
             - test  
-      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+     - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
             - build
           filters:
             branches:
               only: main
-
