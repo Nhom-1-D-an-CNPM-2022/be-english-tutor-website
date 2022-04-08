@@ -20,10 +20,6 @@ jobs:
     executor: node
     steps:
       - checkout
-      - <<: *install_node_modules
-      - run:
-          name: Build
-          command: npm run start
 
 orbs:
   heroku: circleci/heroku@0.0.10 # Invoke the Heroku orb
