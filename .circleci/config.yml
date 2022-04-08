@@ -15,7 +15,7 @@ jobs:
   test:
     executor: node
     steps:
-      
+      - checkout
   build:
     executor: node
     steps:
