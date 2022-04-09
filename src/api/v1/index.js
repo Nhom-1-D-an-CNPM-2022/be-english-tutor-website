@@ -4,6 +4,7 @@ import startMiddleware from './start/middleware';
 import startRoutes from './start/routes';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import startSocket from './start/socketIo';
 
 // Environment variables
 dotenv.config({ path: './src/api/v1/configs/.env' });
@@ -23,6 +24,10 @@ startMiddleware(app);
 
 // Routes
 startRoutes(app);
+
+//socket.io
+startSocket(app);
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
