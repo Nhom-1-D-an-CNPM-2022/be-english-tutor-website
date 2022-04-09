@@ -6,7 +6,7 @@ const register = async (req, res) => {
   try {
     const userFoundByEmail = await User.findOne({ email, isDeleted: false });
     if (userFoundByEmail) {
-      throw new Error('Existed email');
+      throw new Error('Email đã tồn tại');
     }
     const user = new User({
       email,
