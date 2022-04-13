@@ -1,6 +1,6 @@
 const parseErrorIntoMessage = (error) => {
   return {
-    message: error?.message || 'Unknown error',
+    message: error?.message || 'Lỗi không xác định',
   };
 };
 
