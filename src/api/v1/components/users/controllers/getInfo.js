@@ -5,8 +5,6 @@ const getInfo = async (req, res) => {
   const { user } = req;
 
   try {
-    console.log(res.locals.data);
-
     const userFindById = await User.findById(user._id);
     if (userFindById === null) {
       throw new Error("User is not found");
