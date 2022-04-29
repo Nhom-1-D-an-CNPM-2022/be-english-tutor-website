@@ -5,7 +5,7 @@ import parseErrorIntoMessage from "../../../helpers/parseErrorIntoMessage";
 
 const bookLesson = async (req, res) => {
     const {user} = req;
-    const { scheduleId, studentRequest } = req.body;
+    const { scheduleId, tuteeRequest } = req.body;
 
     try {
         if(scheduleId == null) {
@@ -15,7 +15,7 @@ const bookLesson = async (req, res) => {
         const booking = new Booking({
             tutee: user._id,
             schedule: scheduleId,
-            studentRequest: studentRequest,
+            tuteeRequest: tuteeRequest,
         });
         
         await booking.save();
