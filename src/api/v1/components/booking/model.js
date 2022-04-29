@@ -10,10 +10,19 @@ const bookingSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Schedule"
     },
-    studentRequest: {
+    tuteeRequest: {
       type: String,
       trim: true,
-    }
+    },
+    tutorResponse: {
+      type: String,
+      trim: true,
+    },
+    status: {
+      type: String,
+      default: "PENDING",
+      enum: ["PENDING", "REJECTED", "ACCEPTED"],
+    },
   },
   {
     timestamps: true,
