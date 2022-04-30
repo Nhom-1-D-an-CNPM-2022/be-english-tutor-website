@@ -4,6 +4,7 @@ import cancelLesson from "./cancelLesson";
 import getBookedLesson from "./getBookedLesson";
 import getReservation from "./getReservation";
 import rejectReservation from "./rejectReservation";
+import sendMailToTuTor from "./sendMailToTutor";
 
 export default {
     bookLesson,
@@ -12,4 +13,5 @@ export default {
     getReservation,
     acceptReservation,
     rejectReservation,
+    sendMailToTuTor,
 };

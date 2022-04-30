@@ -4,6 +4,8 @@ import startMiddleware from './start/middleware';
 import startRoutes from './start/routes';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import startSocket from './start/socketIo';
+import {createServer} from 'http';
 
 // Environment variables
 dotenv.config({ path: './src/api/v1/configs/.env' });
@@ -11,6 +13,7 @@ dotenv.config({ path: './src/api/v1/configs/.env' });
 // Init Variables
 const app = express();
 const port = process.env.PORT || 5000;
+const server = createServer(app);
 
 //Cookie parser
 app.use(cookieParser());
@@ -24,6 +27,12 @@ startMiddleware(app);
 // Routes
 startRoutes(app);
 
+//socket.io
+startSocket(server);
+
+//server.listen(port, () => {
+//  console.log(`Example app listening at http://localhost:${port}`);
+//});
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
