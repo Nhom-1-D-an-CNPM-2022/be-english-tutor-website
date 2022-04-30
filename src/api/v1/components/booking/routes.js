@@ -8,6 +8,7 @@ bookingRoutes.get("/list/tutor", bookingControllers.getReservation);
 
 //======================== POST ========================
 bookingRoutes.post("/", bookingControllers.bookLesson);
+bookingRoutes.post("/sendMailToTuTor", bookingControllers.sendMailToTuTor);
 
 //======================== PUT ========================
 bookingRoutes.put("/accept", bookingControllers.acceptReservation);

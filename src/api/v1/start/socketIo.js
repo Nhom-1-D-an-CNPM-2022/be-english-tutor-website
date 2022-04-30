@@ -1,9 +1,8 @@
 import {Server} from 'socket.io';
-import { createServer } from "http";
 
-  const list = [];
-const startSocket = (app) =>{
-  const server = createServer(app);
+const list = [];
+const listUser = [];
+const startSocket = (server) =>{
   const io = new Server(server, {
     cors: {
       origin: "*",
@@ -19,9 +18,21 @@ const startSocket = (app) =>{
       for (let s of list)
       if (s.id == socket.id)
         list.splice(list.indexOf(s), 1);
+      for (let s of listUser)
+        if (s.socketID == socket.id)
+          listUser.splice(list.indexOf(s), 1);
     })
   
-    socket.on('online', ()=>{socket.emit('online', list)});
+    socket.on('online', (user)=>{
+      socket.emit('online', list);
+      let x = true;
+      for (let t of listUser)
+        if (t.socketID === socket.id)
+          x = false;
+      if (x){
+        listUser.push({socketID: socket.id, user: user});
+      }
+    });
   
     socket.on("callToUser", ({ from, to }) => {
       io.to(to).emit("callToUser", {
@@ -80,6 +91,15 @@ const startSocket = (app) =>{
     socket.on("endCall", ({ id }) => {
       io.to(id).emit("endCall");
     });
+
+    socket.on('notification', ({teacher, student, course, notification}) =>{
+      let idSocket = null;
+      for (let t in listUser)
+        if (t.user && student._id === t.user._id)
+          idSocket = t.socketID;
+      if (idSocket)
+        io.to(idSocket).emit('notification', {teacher, course, notification});
+    })
   });
 }
 
