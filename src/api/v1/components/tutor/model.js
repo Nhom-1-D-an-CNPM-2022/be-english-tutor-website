@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 
 const tutorSchema = new mongoose.Schema({
-  userId: mongoose.Schema.Types.ObjectId,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   displayName: String,
   hometown: String,
   dateOfBirth: Date,
@@ -12,8 +15,8 @@ const tutorSchema = new mongoose.Schema({
   languages: Array,
   experience: Array,
   education: Array,
-  imageCertificates: String,
   profession: String,
+  imageCertificates: String,
   interests: String,
 });
 
