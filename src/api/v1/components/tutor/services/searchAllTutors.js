@@ -8,7 +8,15 @@ const searchAllTutors = async (options) => {
   const searchString = options?.search || '';
   const searchObject = parseSearchString({
     searchString,
-    keys: ['fullname', 'profession', 'introduction', 'interests'],
+    keys: [
+      'displayName',
+      'profession',
+      'introduction',
+      'interests',
+      'hometown',
+      'teachingStyles',
+      'aboutMe',
+    ],
     separator: '+',
   });
 
