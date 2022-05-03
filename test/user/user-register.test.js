@@ -1,5 +1,5 @@
 
-process.env.NODE_ENV = 'test';
+// process.env.NODE_ENV = 'test';
 
 // import { should as _should, use } from 'chai';
 // import chaiHttp from 'chai-http';
