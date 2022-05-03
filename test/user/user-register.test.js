@@ -13,24 +13,19 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 describe('/POST Register', () => {
-    it('it should POST a user', (done) => {
+    it('it should not POST a user because password is null', (done) => {
         let user = {
-            email: "hiendeptrai@gmail.com",
-            password: "password",
+            email: "username",
+            password: null,
             fullname: "fullname"
         };
         chai.request(server)
             .post('/users/register')
             .send(user)
             .end((err, res) => {
-                //console.log(res);
-                res.should.have.status(200);
+                res.should.have.status(400);
                 res.body.should.be.a('object');
-                res.body.should.have.property('message').eql('user successfully added!');
-                res.body.user.should.have.property('id');
-                res.body.user.should.have.property('email').eql(user.email);
-                res.body.user.should.have.property('password').eql(user.password);
-                res.body.user.should.have.property('fullname').eql(user.fullname);
+                
                 done();
             });
     });
