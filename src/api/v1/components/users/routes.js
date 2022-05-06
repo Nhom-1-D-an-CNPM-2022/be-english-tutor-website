@@ -1,10 +1,11 @@
 import express from "express";
+import verifyToken from "../../middlewares/verifyToken";
 //import userControllers from "./controllers";
 import userControllers from "./controllers";
-import verifyToken from "../../middlewares/verifyToken";
 const userRoutes = express.Router();
 
 //======================== GET ========================
+userRoutes.get("/get-all", userControllers.getUsers);
 userRoutes.get("/info", verifyToken, userControllers.getInfo);
 
 //======================== POST ========================

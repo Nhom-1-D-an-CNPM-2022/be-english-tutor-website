@@ -13,7 +13,7 @@ function getNumberOfDays(start, end) {
 const getListTutors = (req, res) => {
   Tutor.find({}, async (err, tutors) => {
     if (err) {
-      return res.status(500).json({ message: e });
+      return res.status(500).json({ message: err });
     }
     let results = tutors.map(async (tutor) => {
       const user = await User.findOne({ _id: tutor.userId });
