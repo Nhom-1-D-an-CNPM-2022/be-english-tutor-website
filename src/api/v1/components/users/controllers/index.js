@@ -5,6 +5,7 @@ import loginFacebook from "./loginFacebook";
 import loginGoogle from "./loginGoogle";
 import refreshToken from "./refreshToken";
 import register from "./register";
+import updateUser from "./updateUser";
 
 export default {
   register,
@@ -14,4 +15,5 @@ export default {
   refreshToken,
   getInfo,
   getUsers,
+  updateUser,
 };

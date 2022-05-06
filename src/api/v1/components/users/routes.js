@@ -15,6 +15,7 @@ userRoutes.post("/login/facebook", userControllers.loginFacebook);
 userRoutes.post("/login", userControllers.login);
 userRoutes.post("/refresh-token", userControllers.refreshToken);
 //======================== PUT ========================
+userRoutes.put("/update", userControllers.updateUser);
 //======================== DELETE ========================
 
 export default userRoutes;
