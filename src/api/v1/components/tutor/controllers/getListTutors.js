@@ -28,8 +28,8 @@ const getListTutors = (req, res) => {
           today.getFullYear();
         const ageOfAccount = getNumberOfDays(user.createdAt, currentDay);
         return {
-          fullname: user.fullname,
-          hometown: user.hometown,
+          fullname: tutor.displayName,
+          hometown: tutor.hometown,
           introduction: tutor.introduction,
           ageOfAccount: ageOfAccount,
         };
