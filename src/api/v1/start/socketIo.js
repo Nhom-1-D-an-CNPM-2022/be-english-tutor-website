@@ -30,7 +30,7 @@ const startSocket = (server) =>{
         if (t.socketID === socket.id)
           x = false;
       if (x){
-        listUser.push({socketID: socket.id, user: user});
+        listUser.push({socketI: socket.id, user: user});
       }
     });
   
