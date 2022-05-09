@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'test';
+
 import { expect } from "chai";
 import searchAllTutors from "../../src/api/v1/components/tutor/services/searchAllTutors";
 

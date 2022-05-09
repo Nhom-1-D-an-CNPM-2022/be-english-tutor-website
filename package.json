@@ -8,7 +8,11 @@
     "start-v1": "node --experimental-specifier-resolution=node ./src/api/v1/index.js",
     "dev": "npm run dev-v1",
     "start": "npm run start-v1",
-    "test": "mocha --experimental-specifier-resolution=node 'test/**/*.js' --timeout 20000 "
+    "test": "mocha --experimental-specifier-resolution=node 'test/**/*.js' --timeout 20000 ",
+    
+    "test-watch": "mocha --experimental-specifier-resolution=node -R list -w ./test/**/*.spec.js --timeout 20000",
+    "test-single": "mocha --experimental-specifier-resolution=node --timeout 20000",
+    "test-single-watch": "mocha --experimental-specifier-resolution=node -R list -w --timeout 20000"
   },
   "keywords": [],
   "author": "",
