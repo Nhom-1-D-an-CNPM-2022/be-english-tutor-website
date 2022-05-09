@@ -6,10 +6,10 @@ const notificationSchema = new mongoose.Schema(
       type: String,
     },
     from:{
-      type: String,
+      type: Object,
     },
     to:{
-      type: String,
+      type: Object,
     },
     time: {
         type: Date,
