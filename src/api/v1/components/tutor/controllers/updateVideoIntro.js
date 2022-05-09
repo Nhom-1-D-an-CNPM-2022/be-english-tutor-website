@@ -10,7 +10,7 @@ const updateVideoIntro = async (req, res) => {
       const filter = { userId: user._id };
       const update = { videoIntroduction: link };
       const tutor = await Tutor.findOneAndUpdate(filter, update);
-      return res.status(200).send({ urlVideo: link });
+      return res.status(200).send({ url: link });
     })
     .catch((err) => {
       console.log(err);

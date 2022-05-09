@@ -18,9 +18,14 @@ tutorRoutes.put(
   tutorController.updateVideoIntro
 );
 tutorRoutes.put(
-  "/profile/certificate",
+  "/profile/picture",
   verifyToken,
-  tutorController.updateCertificateImg
+  tutorController.updateProfilePicture
+);
+tutorRoutes.put(
+  "/profile/certificates",
+  verifyToken,
+  tutorController.updateCertificates
 );
 //======================== DELETE ========================
 

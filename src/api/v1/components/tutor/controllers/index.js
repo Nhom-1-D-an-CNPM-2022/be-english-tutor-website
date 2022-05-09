@@ -2,8 +2,9 @@ import createNewTutor from "./createNewTutor";
 import getListTutors from "./getListTutors";
 import getProfile from "./getProfile";
 import searchAllTutors from "./searchAllTutors";
-import updateCertificateImg from "./updateCertificateImg";
+import updateCertificates from "./updateCertificates";
 import updateProfile from "./updateProfile";
+import updateProfilePicture from "./updateProfilePicture";
 import updateVideoIntro from "./updateVideoIntro";
 
 export default {
@@ -13,5 +14,6 @@ export default {
   getProfile,
   updateProfile,
   updateVideoIntro,
-  updateCertificateImg,
+  updateProfilePicture,
+  updateCertificates,
 };

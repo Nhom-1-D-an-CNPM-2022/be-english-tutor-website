@@ -1,16 +1,17 @@
 import uploadImg from "../../../utils/uploadImage";
 import Tutor from "../model";
 
-const updateCertificateImg = async (req, res) => {
+const updateProfilePicture = async (req, res) => {
   const { user } = req;
   const { URLFile } = req.body;
+  console.log("picture");
 
   uploadImg(URLFile)
     .then(async (link) => {
       const filter = { userId: user._id };
-      const update = { imageCertificates: link };
-      const tutor = await Tutor.findOneAndUpdate(filter, update);
-      return res.status(200).send({ urlImg: link });
+      const update = { profilePicture: link };
+      await Tutor.findOneAndUpdate(filter, update);
+      return res.status(200).send({ url: link });
     })
     .catch((err) => {
       console.log(err);
@@ -18,4 +19,4 @@ const updateCertificateImg = async (req, res) => {
     });
 };
 
-export default updateCertificateImg;
+export default updateProfilePicture;
