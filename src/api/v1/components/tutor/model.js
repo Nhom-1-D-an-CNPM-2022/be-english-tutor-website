@@ -1,21 +1,25 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const tutorSchema = new mongoose.Schema({
-  userId: mongoose.Schema.Types.ObjectId,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  displayName: String,
+  hometown: String,
+  dateOfBirth: Date,
+  videoIntroduction: String,
   introduction: String,
-  education: String,
-  experience: String,
-  profession: String,
-  schedule: Date,
-  languages: String,
   teachingStyles: String,
-  certificates: String,
-  interests: {
-    type: String,
-  },
-  fullname: {
-    type: String,
-  },
+  aboutMe: String,
+  languages: Array,
+  experience: Array,
+  education: Array,
+  profession: String,
+  imageCertificates: String,
+  interests: String,
 });
 
-export default mongoose.model("Tutor", tutorSchema);
+const Tutor = mongoose.model('Tutor', tutorSchema);
+
+export default Tutor;
