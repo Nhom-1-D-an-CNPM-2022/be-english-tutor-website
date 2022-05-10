@@ -19,6 +19,9 @@ const tutorSchema = new mongoose.Schema({
   certificates: Array,
   profilePicture: String,
   interests: String,
+  motivation: String,
+  source: String,
+  otherPlatforms: Array,
 });
 
 const Tutor = mongoose.model("Tutor", tutorSchema);
