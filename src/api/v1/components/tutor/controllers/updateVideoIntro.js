@@ -1,5 +1,5 @@
-import uploadVideo from "../../../utils/uploadVideo";
-import Tutor from "../model";
+import uploadVideo from '../../../utils/uploadVideo';
+import tutorServices from '../services';
 
 const updateVideoIntro = async (req, res) => {
   const { user } = req;
@@ -9,7 +9,7 @@ const updateVideoIntro = async (req, res) => {
     .then(async (link) => {
       const filter = { userId: user._id };
       const update = { videoIntroduction: link };
-      const tutor = await Tutor.findOneAndUpdate(filter, update);
+      await tutorServices.getOneAndUpdate(filter, update);
       return res.status(200).send({ url: link });
     })
     .catch((err) => {

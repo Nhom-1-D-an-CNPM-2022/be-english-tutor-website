@@ -2,6 +2,7 @@ import User from '../model';
 
 import parseErrorIntoMessage from '../../../helpers/parseErrorIntoMessage';
 import facebookAccountVerification from '../helpers/facebookAccountVerification';
+import userServices from '../services';
 
 const loginFacebook = async (req, res) => {
   const { accessToken } = req.body;
@@ -13,40 +14,43 @@ const loginFacebook = async (req, res) => {
 
     const facebookAccount = await facebookAccountVerification(accessToken);
     const { id: facebookId, name } = facebookAccount;
-    const userFoundByFacebookId = await User.findOne({ facebookId, isDeleted: false });
+    const userFoundByFacebookId = await userServices.getOne({
+      facebookId,
+      isDeleted: false,
+    });
     if (userFoundByFacebookId) {
-      const { accessToken, refreshToken } = User.generateToken(userFoundByFacebookId);
+      const { accessToken, refreshToken } = User.generateToken(
+        userFoundByFacebookId
+      );
       res.cookie(process.env.REFRESH_TOKEN_KEY, refreshToken, {
         httpOnly: true,
         secure: false,
-        path: "/",
-        sameSite: "strict",
+        path: '/',
+        sameSite: 'strict',
       });
 
       res.status(200).json({
-        "user": userFoundByFacebookId,
-        "accessToken": accessToken,
+        user: userFoundByFacebookId,
+        accessToken: accessToken,
       });
-    }
-    else {
-      const user = new User({
+    } else {
+      const newUser = await userServices.createNewUser({
         fullname: name,
         facebookId,
         isVerified: true,
       });
-      const savedUser = await user.save();
 
-      const { accessToken, refreshToken } = User.generateToken(savedUser);
+      const { accessToken, refreshToken } = User.generateToken(newUser);
       res.cookie(process.env.REFRESH_TOKEN_KEY, refreshToken, {
         httpOnly: true,
         secure: false,
-        path: "/",
-        sameSite: "strict",
+        path: '/',
+        sameSite: 'strict',
       });
 
       res.status(201).send({
-        "user": savedUser,
-        "accessToken": accessToken,
+        user: savedUser,
+        accessToken: accessToken,
       });
     }
   } catch (error) {

@@ -1,16 +1,16 @@
-import uploadImg from "../../../utils/uploadImage";
-import Tutor from "../model";
+import uploadImg from '../../../utils/uploadImage';
+import tutorServices from '../services';
 
 const updateProfilePicture = async (req, res) => {
   const { user } = req;
   const { URLFile } = req.body;
-  console.log("picture");
+  console.log('picture');
 
   uploadImg(URLFile)
     .then(async (link) => {
       const filter = { userId: user._id };
       const update = { profilePicture: link };
-      await Tutor.findOneAndUpdate(filter, update);
+      await tutorServices.getOneAndUpdate(filter, update);
       return res.status(200).send({ url: link });
     })
     .catch((err) => {

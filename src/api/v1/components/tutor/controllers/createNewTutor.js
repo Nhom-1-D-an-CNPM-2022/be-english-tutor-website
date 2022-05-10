@@ -1,29 +1,31 @@
 // import cloudinary from "../../../utils/cloudinary";
-import parseErrorIntoMessage from "../../../helpers/parseErrorIntoMessage";
-import User from "../../users/model";
-import Tutor from "../model";
+import parseErrorIntoMessage from '../../../helpers/parseErrorIntoMessage';
+import userServices from '../../users/services';
+import tutorServices from '../services';
 
 const createNewTutor = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const userFoundByEmail = await User.findOne({ email, isDeleted: false });
+    const userFoundByEmail = await userServices.getOneByEmail({
+      email,
+      isDeleted: false,
+    });
     if (userFoundByEmail) {
-      throw new Error("Email đã tồn tại");
+      throw new Error('Email đã tồn tại');
     }
-    const type = "tutor";
-    const user = new User({
+    const type = 'tutor';
+
+    const newUser = await userServices.createNewUser({
       email,
       password,
       type,
     });
-    const savedUser = await user.save();
 
-    const tutor = new Tutor({
-      userId: savedUser._id,
+    const newTutor = await tutorServices.createNewTutor({
+      userId: newUser._id,
     });
-    const saveTutor = await tutor.save();
 
-    res.status(201).send(saveTutor);
+    res.status(201).send(newTutor);
   } catch (error) {
     res.status(400).send(parseErrorIntoMessage(error));
   }

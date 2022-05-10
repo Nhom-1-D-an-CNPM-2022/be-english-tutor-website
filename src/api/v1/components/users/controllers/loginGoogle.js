@@ -2,6 +2,7 @@ import User from '../model';
 import parseErrorIntoMessage from '../../../helpers/parseErrorIntoMessage';
 import googleAccountVerification from '../helpers/googleAccountVerification';
 import generateUUID from '../../../helpers/generateUUID';
+import userServices from '../services';
 
 const loginGoogle = async (req, res) => {
   const { tokenId } = req.body;
@@ -12,42 +13,45 @@ const loginGoogle = async (req, res) => {
     const googleAccountInformation = await googleAccountVerification(tokenId);
     const { email, sub: googleId, name: fullname } = googleAccountInformation;
     const password = generateUUID(32);
-    const userFoundByEmail = await User.findOne({ email, isDeleted: false });
+    const userFoundByEmail = await userServices.getOne({
+      email,
+      isDeleted: false,
+    });
     if (userFoundByEmail) {
-      const {accessToken, refreshToken} = User.generateToken(userFoundByEmail);
+      const { accessToken, refreshToken } =
+        User.generateToken(userFoundByEmail);
       res.cookie(process.env.REFRESH_TOKEN_KEY, refreshToken, {
         httpOnly: true,
         secure: false,
-        path: "/",
-        sameSite: "strict",
+        path: '/',
+        sameSite: 'strict',
       });
 
       res.status(200).send({
-        "user": userFoundByEmail ,
-        "accessToken": accessToken,
+        user: userFoundByEmail,
+        accessToken: accessToken,
       });
     }
-    
-    const user = new User({
+
+    const newUser = await userServices.createNewUser({
       email,
       password,
       fullname,
       googleId,
       isVerified: true,
     });
-    const savedUser = await user.save();
 
-    const {accessToken, refreshToken} = User.generateToken(savedUser);
-      res.cookie(process.env.REFRESH_TOKEN_KEY, refreshToken, {
-        httpOnly: true,
-        secure: false,
-        path: "/",
-        sameSite: "strict",
-      });
+    const { accessToken, refreshToken } = User.generateToken(newUser);
+    res.cookie(process.env.REFRESH_TOKEN_KEY, refreshToken, {
+      httpOnly: true,
+      secure: false,
+      path: '/',
+      sameSite: 'strict',
+    });
 
     res.status(201).send({
-      "user": savedUser,
-      "accessToken": accessToken,
+      user: savedUser,
+      accessToken: accessToken,
     });
   } catch (error) {
     res.status(400).send(parseErrorIntoMessage(error));
