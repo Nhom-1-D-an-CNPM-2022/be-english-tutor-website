@@ -1,9 +1,10 @@
-
-import { expect } from "chai";
+import chai from 'chai';
+//import { expect } from "chai";
 import searchAllTutors from "../../src/api/v1/components/tutor/services/searchAllTutors";
-
-describe('search all tutor with properties null', async ()=>{
-    const option={
+const assert = chai.assert;
+describe('Feature Search All Tutor', ()=>{
+    it ('search all tutor with properties null', () => {
+      const option={
         search: '',
         skip: '',
         limit: '',
@@ -11,6 +12,15 @@ describe('search all tutor with properties null', async ()=>{
         sortBy: '',
         order: '',
       }
-    const resulttesting = await searchAllTutors(option);
-    expect(resulttesting).to.be.undefined;
+      return searchAllTutors(option).then(result => {
+        assert.fail();
+      })
+    });
+
+    it ('search all tutor with  null', () => {
+      const option=null;
+      return searchAllTutors(option).then(result => {
+        assert.fail();
+      })
+    });
 })
