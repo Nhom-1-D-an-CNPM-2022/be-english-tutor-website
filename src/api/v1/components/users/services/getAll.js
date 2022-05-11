@@ -1,7 +1,7 @@
-import User from '../model';
+import User from "../model";
 
-const getAll = async (filter) => {
-  const allUsers = await User.find(filter);
+const getAll = async (number, page) => {
+  const allUsers = await User.find().limit(number).skip(page);
 
   return allUsers;
 };

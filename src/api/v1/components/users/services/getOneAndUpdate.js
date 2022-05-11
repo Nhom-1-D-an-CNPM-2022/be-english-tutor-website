@@ -1,4 +1,4 @@
-import User from '../model';
+import User from "../model";
 
 const getOneAndUpdate = async (
   filter,
@@ -6,19 +6,19 @@ const getOneAndUpdate = async (
 ) => {
   const foundUser = await User.findOne(filter);
 
-  if (fullname !== '') {
+  if (fullname !== undefined) {
     foundUser.fullname = fullname;
   }
-  if (password !== '') {
+  if (password !== undefined) {
     foundUser.password = password;
   }
-  if (isVerified !== '') {
+  if (isVerified !== undefined) {
     foundUser.isVerified = isVerified;
   }
-  if (isActive !== '') {
+  if (isActive !== undefined) {
     foundUser.isActive = isActive;
   }
-  if (isDeleted !== '') {
+  if (isDeleted !== undefined) {
     foundUser.isDeleted = isDeleted;
   }
 
