@@ -3,16 +3,19 @@ import nodemailer from 'nodemailer';
 
 const sendMailToTuTor = (req, res) => {
     const body = req.body;
+    const myEmail = process.env.EMAIL;
+    const myPassword = process.env.PASSWORD;
+    const apiUrl = process.env.SERVER_URL;
     try {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-              user: process.env.email,
-              pass: process.env.pass,
+              user: myEmail,
+              pass: myPassword,
             }
           });
             const mailOptions = {
-              from: process.env.email,
+              from: myEmail,
               to: body.student.email,
               subject: 'Đăng ký lớp học',
               html:`
@@ -27,7 +30,7 @@ const sendMailToTuTor = (req, res) => {
                         <p>Hi!</p>
                         <p> Lớp học của bạn có một đăng ký mới</p>
                         <br>
-                        <a href='https://localhost:5000'>
+                        <a href='${apiUrl}'>
                             <button>xem</button>
                         </a>
                     </div>

@@ -1,8 +1,11 @@
-import createNewTutor from './createNewTutor';
-import getListTutors from './getListTutors';
-import searchAllTutors from './searchAllTutors';
-import getProfile from './getProfile';
-import updateProfile from './updateProfile';
+import createNewTutor from "./createNewTutor";
+import getListTutors from "./getListTutors";
+import getProfile from "./getProfile";
+import searchAllTutors from "./searchAllTutors";
+import updateCertificates from "./updateCertificates";
+import updateProfile from "./updateProfile";
+import updateProfilePicture from "./updateProfilePicture";
+import updateVideoIntro from "./updateVideoIntro";
 
 export default {
   getListTutors,
@@ -10,4 +13,7 @@ export default {
   createNewTutor,
   getProfile,
   updateProfile,
+  updateVideoIntro,
+  updateProfilePicture,
+  updateCertificates,
 };

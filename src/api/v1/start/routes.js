@@ -2,6 +2,7 @@ import tutorRoutes from "../components/tutor/routes";
 import userRoutes from "../components/users/routes";
 import scheduleRoutes from "../components/schedule/routes";
 import bookingRoutes from "../components/booking/routes";
+import notificationRoutes from "../components/notification/routes";
 import verifyToken from "../middlewares/verifyToken";
 const startRoutes = (app) => {
   // routes
@@ -9,6 +10,7 @@ const startRoutes = (app) => {
   app.use("/tutors", tutorRoutes);
   app.use("/schedule", verifyToken, scheduleRoutes);
   app.use("/booking", verifyToken, bookingRoutes);
+  app.use("/notification", verifyToken, notificationRoutes);
 
   //404
   app.use((req, res, next) => {

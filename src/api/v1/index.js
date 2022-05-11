@@ -1,11 +1,11 @@
-import express from 'express';
-import connectMongoDB from './database/mongo';
-import startMiddleware from './start/middleware';
-import startRoutes from './start/routes';
-import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
-import startSocket from './start/socketIo';
-import {createServer} from 'http';
+import express from "express";
+import connectMongoDB from "./database/mongo";
+import startMiddleware from "./start/middleware";
+import startRoutes from "./start/routes";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import startSocket from "./start/socketIo";
+import { createServer } from "http";
 
 // Environment variables
 dotenv.config({ path: "./src/api/v1/configs/.env" });
@@ -27,6 +27,9 @@ connectMongoDB();
 
 // Middlewares
 startMiddleware(app);
+
+// Redis
+import "./redis";
 
 // Routes
 startRoutes(app);

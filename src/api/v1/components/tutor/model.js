@@ -16,10 +16,11 @@ const tutorSchema = new mongoose.Schema({
   experience: Array,
   education: Array,
   profession: String,
-  imageCertificates: String,
+  certificates: Array,
+  profilePicture: String,
   interests: String,
 });
 
-const Tutor = mongoose.model('Tutor', tutorSchema);
+const Tutor = mongoose.model("Tutor", tutorSchema);
 
 export default Tutor;

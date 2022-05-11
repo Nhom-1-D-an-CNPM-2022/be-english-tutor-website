@@ -1,20 +1,23 @@
-import User from '../model';
 import parseErrorIntoMessage from '../../../helpers/parseErrorIntoMessage';
+import userServices from '../services';
 
 const register = async (req, res) => {
   const { email, password, fullname } = req.body;
   try {
-    const userFoundByEmail = await User.findOne({ email, isDeleted: false });
-    if (userFoundByEmail) {
+    let userFoundByEmail;
+    try {
+      userFoundByEmail = await userServices.getOne({ email, isDeleted: false });
+    } catch (error) {
       throw new Error('Email đã tồn tại');
     }
-    const user = new User({
+
+    const newUser = await userServices.createNewUser({
       email,
       password,
       fullname,
     });
-    const savedUser = await user.save();
-    res.status(201).send(savedUser);
+
+    res.status(201).send(newUser);
   } catch (error) {
     res.status(400).send(parseErrorIntoMessage(error));
   }
