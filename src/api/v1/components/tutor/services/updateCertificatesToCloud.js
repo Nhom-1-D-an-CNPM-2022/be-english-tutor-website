@@ -14,18 +14,27 @@ const updateCertificatesToCloud = async (tutorId, certificates) => {
     return await uploadImg(certificate.URLFile);
   });
 
-  return await Promise.all(updatedCertificates).then(async (links) => {
-    let certificateUpdated = [];
-    links.map((link, index) => {
-      certificateUpdated.push({ url: link, type: certificates[index].type });
-    });
+  return await Promise.all(updatedCertificates)
+    .then(async (links) => {
+      let certificateUpdated = [];
+      links.map((link, index) => {
+        certificateUpdated.push({
+          url: link,
+          type: certificates[index].type,
+          fileName: certificates[index].fileName,
+        });
+      });
 
-    const update = { certificates: certificateUpdated };
-    await Tutor.findByIdAndUpdate(tutorId, update, {
-      new: true,
-    });
+      const update = { certificates: certificateUpdated };
+      await Tutor.findByIdAndUpdate(tutorId, update, {
+        new: true,
+      });
 
-    return certificateUpdated;
-  });
+      return certificateUpdated;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error;
+    });
 };
 export default updateCertificatesToCloud;
