@@ -6,7 +6,8 @@
   "scripts": {
     "dev-v1": "nodemon --experimental-specifier-resolution=node ./src/api/v1/index.js",
     "start-v1": "nodemon --experimental-specifier-resolution=node ./src/api/v1/index.js",
-    "dev": "npm run dev-v1",
+    "dev-v2": "nodemon --experimental-specifier-resolution=node ./src/api/v2/index.js",
+    "dev": "npm run dev-v2",
     "start": "npm run start-v1"
   },
   "keywords": [],
