@@ -1,9 +1,9 @@
 import parseErrorIntoMessage from "../../../helpers/parseErrorIntoMessage";
 import userServices from "../services";
 
-const updateUser = async (body) => {
+const updateUser = async (req, res) => {
   try {
-    const { _id, dataUpdate } = body;
+    const { _id, dataUpdate } = req.body;
     const { fullname, password, isVerified, isActive, isDeleted } = dataUpdate;
 
     const updatedUser = await userServices.getOneAndUpdate(
@@ -18,15 +18,13 @@ const updateUser = async (body) => {
     );
 
     if (updatedUser.message) {
-      return false;
+      res.status(400).send(parseErrorIntoMessage(error));
     }
 
-    return true;
-
-    // res.status(200).send(updatedUser);
+    res.status(200).send(updatedUser);
   } catch (error) {
-    // res.status(400).send(parseErrorIntoMessage(error));
     console.log(parseErrorIntoMessage(error));
+    res.status(400).send(parseErrorIntoMessage(error));
   }
 };
 
