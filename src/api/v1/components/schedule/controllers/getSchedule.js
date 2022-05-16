@@ -5,41 +5,38 @@ const getSchedule = async (req, res) => {
     try {
         //get Condition by tutor or startTime
         const condition = whereCondition(req);
-        console.log(condition);
 
         const data = await ScheduleService.findByCondition(condition);
 
-        res.status(200).send(data);
-    } catch (error) {
-        res.status(400).send(parseErrorIntoMessage(error));
-    }
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(400).send(parseErrorIntoMessage(error));
+  }
 };
 
 const whereCondition = (req) => {
-    const {
-        tutorId,
-        startTime,
-    } = req.body;
+  const { tutorId, startTime, interval } = req.query;
 
-    let condition = {};
+  let condition = {};
 
-    if(tutorId != null) {
-        condition = {
-            "tutor": tutorId,
-            "startTime": {
-                "$gte": new Date().toISOString(),
-            }
-        }
-    }
-    else {
-        condition = {
-            "startTime": {
-                "$gte": startTime,
-                "$lte": startTime,
-            }
-        }
-    }
-    return condition;
-}
+  if (tutorId != null) {
+    condition = {
+      tutor: tutorId,
+      startTime: {
+        $gte: new Date().toISOString(),
+      },
+    };
+  } else {
+    condition = {
+      startTime: {
+        $gte: startTime,
+        $lte: startTime,
+      },
+      interval: interval,
+      isBooked: false,
+    };
+  }
+  return condition;
+};
 
 export default getSchedule;
