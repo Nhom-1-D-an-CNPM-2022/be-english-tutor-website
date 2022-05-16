@@ -30,7 +30,7 @@ const whereCondition = (req) => {
     condition = {
       startTime: {
         $gte: startTime,
-        // $lte: startTime,
+        $lte: startTime,
       },
       interval: interval,
       isBooked: false,
