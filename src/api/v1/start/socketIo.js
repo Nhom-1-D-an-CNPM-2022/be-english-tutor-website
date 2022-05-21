@@ -19,8 +19,12 @@ const startSocket = (server) =>{
       if (s.id == socket.id)
         list.splice(list.indexOf(s), 1);
       for (let s of listUser)
-        if (s.socketID == socket.id)
+        if (s.socketID == socket.id) {
           listUser.splice(list.indexOf(s), 1);
+          if(s.user.type == "tutor") {
+            io.sockets.emit("removeOnlineTutor", s.user._id);
+          }
+        }
     })
   
     socket.on('online', (user)=>{
@@ -30,9 +34,22 @@ const startSocket = (server) =>{
         if (t.socketID === socket.id)
           x = false;
       if (x){
-        listUser.push({socketI: socket.id, user: user});
+        listUser.push({socketID: socket.id, user: user});
+
+        //Send user info to all client if user is tutor
+        if(user !==null && user.type == "tutor") {
+          io.sockets.emit("receiveNewOnlineTutor", user);
+        }
       }
     });
+
+    socket.on('getOnlineTutors', () => {
+      console.log(listUser);
+      const listTutor = listUser.filter(item => {
+        return item.user && item.user.type === "tutor";
+      });
+      io.to(socket.id).emit("receiveOnlineTutors", listTutor);
+    })
   
     socket.on("callToUser", ({ from, to }) => {
       io.to(to).emit("callToUser", {
