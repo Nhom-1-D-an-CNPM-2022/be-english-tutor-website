@@ -7,6 +7,7 @@ const tutorRoutes = express.Router();
 //======================== GET ========================
 tutorRoutes.get("/", tutorController.getListTutors);
 tutorRoutes.get("/search", tutorController.searchAllTutors);
+tutorRoutes.get("/profile/me", verifyToken, tutorController.getProfileByUserId);
 tutorRoutes.get("/profile/:tutorId", tutorController.getProfile);
 //======================== POST ========================
 tutorRoutes.post("/", tutorController.createNewTutor);
@@ -15,17 +16,17 @@ tutorRoutes.put("/profile/me", verifyToken, tutorController.updateProfile);
 tutorRoutes.put(
   "/profile/video-intro",
   verifyToken,
-  tutorController.updateVideoIntro
+  tutorController.updateVideoIntro,
 );
 tutorRoutes.put(
   "/profile/picture",
   verifyToken,
-  tutorController.updateProfilePicture
+  tutorController.updateProfilePicture,
 );
 tutorRoutes.put(
   "/profile/certificates",
   verifyToken,
-  tutorController.updateCertificates
+  tutorController.updateCertificates,
 );
 //======================== DELETE ========================
 

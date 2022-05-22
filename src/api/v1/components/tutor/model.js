@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const tutorSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
   displayName: String,
   hometown: String,
@@ -21,7 +21,7 @@ const tutorSchema = new mongoose.Schema({
   interests: String,
   motivation: String,
   source: String,
-  otherPlatforms: Array,
+  otherPlatforms: Object,
 });
 
 const Tutor = mongoose.model("Tutor", tutorSchema);
