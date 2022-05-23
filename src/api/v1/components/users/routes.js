@@ -16,6 +16,7 @@ userRoutes.post("/login", userControllers.login);
 userRoutes.post("/refresh-token", userControllers.refreshToken);
 //======================== PUT ========================
 userRoutes.put("/update", userControllers.updateUser);
+userRoutes.put("/upgrade", verifyToken, userControllers.upgradeAccount);
 //======================== DELETE ========================
 
 export default userRoutes;
