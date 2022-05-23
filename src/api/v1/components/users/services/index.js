@@ -1,8 +1,9 @@
-import getOneByEmail from './getOneByEmail';
-import getOne from './getOne';
-import getAll from './getAll';
-import getOneAndUpdate from './getOneAndUpdate';
-import createNewUser from './createNewUser';
+import createNewUser from "./createNewUser";
+import getAll from "./getAll";
+import getOne from "./getOne";
+import getOneAndUpdate from "./getOneAndUpdate";
+import getOneAndUpgradeAccount from "./getOneAndUpgradeAccount";
+import getOneByEmail from "./getOneByEmail";
 
 const userServices = {
   getOneByEmail,
@@ -10,6 +11,7 @@ const userServices = {
   getOne,
   getAll,
   getOneAndUpdate,
+  getOneAndUpgradeAccount,
 };
 
 export default userServices;
