@@ -14,14 +14,9 @@ tutorRoutes.post("/", tutorController.createNewTutor);
 //======================== PUT ========================
 tutorRoutes.put("/profile/me", verifyToken, tutorController.updateProfile);
 tutorRoutes.put(
-  "/profile/video-intro",
+  "/profile/media",
   verifyToken,
-  tutorController.updateVideoIntro,
-);
-tutorRoutes.put(
-  "/profile/picture",
-  verifyToken,
-  tutorController.updateProfilePicture,
+  tutorController.updateProfileMedia,
 );
 tutorRoutes.put(
   "/profile/certificates",

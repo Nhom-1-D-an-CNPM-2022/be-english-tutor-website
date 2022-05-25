@@ -5,8 +5,7 @@ import getProfileByUserId from "./getProfileByUserId";
 import searchAllTutors from "./searchAllTutors";
 import updateCertificates from "./updateCertificates";
 import updateProfile from "./updateProfile";
-import updateProfilePicture from "./updateProfilePicture";
-import updateVideoIntro from "./updateVideoIntro";
+import updateProfileMedia from "./updateProfileMedia";
 
 export default {
   getListTutors,
@@ -15,7 +14,6 @@ export default {
   getProfile,
   getProfileByUserId,
   updateProfile,
-  updateVideoIntro,
-  updateProfilePicture,
+  updateProfileMedia,
   updateCertificates,
 };

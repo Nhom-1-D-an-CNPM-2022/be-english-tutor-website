@@ -8,7 +8,7 @@ const tutorSchema = new mongoose.Schema({
   displayName: String,
   hometown: String,
   dateOfBirth: Date,
-  videoIntroduction: String,
+  videoIntroduction: Object,
   introduction: String,
   teachingStyles: String,
   aboutMe: String,
@@ -17,11 +17,13 @@ const tutorSchema = new mongoose.Schema({
   education: Array,
   profession: String,
   certificates: Array,
-  profilePicture: String,
+  profilePicture: Object,
   interests: String,
   motivation: String,
   source: String,
   otherPlatforms: Object,
+  isSubmitted: Boolean,
+  isApproved: Boolean,
 });
 
 const Tutor = mongoose.model("Tutor", tutorSchema);
