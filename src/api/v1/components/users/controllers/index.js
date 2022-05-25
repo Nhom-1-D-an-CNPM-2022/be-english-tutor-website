@@ -6,6 +6,8 @@ import loginGoogle from "./loginGoogle";
 import refreshToken from "./refreshToken";
 import register from "./register";
 import updateUser from "./updateUser";
+import getTutors from "./getTutors";
+import upgradeAccount from "./upgradeAccount";
 
 export default {
   register,
@@ -16,4 +18,6 @@ export default {
   getInfo,
   getUsers,
   updateUser,
+  getTutors,
+  upgradeAccount,
 };
