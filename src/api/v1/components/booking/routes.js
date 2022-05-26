@@ -5,6 +5,7 @@ const bookingRoutes = express.Router();
 //======================== GET ========================
 bookingRoutes.get("/list/tutee", bookingControllers.getBookedLesson);
 bookingRoutes.get("/list/tutor", bookingControllers.getReservation);
+bookingRoutes.get("/history", bookingControllers.history);
 
 //======================== POST ========================
 bookingRoutes.post("/", bookingControllers.bookLesson);

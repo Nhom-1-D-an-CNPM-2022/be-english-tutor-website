@@ -15,16 +15,26 @@ const startSocket = (server) =>{
     list.push({id: socket.id});
   
     socket.on('disconnect', ()=>{
-      for (let s of list)
-      if (s.id == socket.id)
-        list.splice(list.indexOf(s), 1);
-      for (let s of listUser)
+      let i = 0;
+      while (i<list.length){
+        let s = list[i];
+        if (s.id == socket.id)
+          list.splice(list.indexOf(s), 1);
+        else
+          i++;
+      }
+      i=0;
+      while (i<listUser.length){
+        let s = listUser[i];
         if (s.socketID == socket.id) {
           listUser.splice(list.indexOf(s), 1);
           if(s.user.type == "tutor") {
             io.sockets.emit("removeOnlineTutor", s.user._id);
           }
         }
+        else
+          i++;
+      }
     })
   
     socket.on('online', (user)=>{
