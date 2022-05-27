@@ -7,6 +7,7 @@ import refreshToken from "./refreshToken";
 import register from "./register";
 import updateUser from "./updateUser";
 import getTutors from "./getTutors";
+import loginTutor from "./loginTutor";
 
 export default {
   register,
@@ -18,4 +19,5 @@ export default {
   getUsers,
   updateUser,
   getTutors,
+  loginTutor,
 };
