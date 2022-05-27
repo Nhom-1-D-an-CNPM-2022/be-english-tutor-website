@@ -15,12 +15,26 @@ const startSocket = (server) =>{
     list.push({id: socket.id});
   
     socket.on('disconnect', ()=>{
-      for (let s of list)
-      if (s.id == socket.id)
-        list.splice(list.indexOf(s), 1);
-      for (let s of listUser)
-        if (s.socketID == socket.id)
+      let i = 0;
+      while (i<list.length){
+        let s = list[i];
+        if (s.id == socket.id)
+          list.splice(list.indexOf(s), 1);
+        else
+          i++;
+      }
+      i=0;
+      while (i<listUser.length){
+        let s = listUser[i];
+        if (s.socketID == socket.id) {
           listUser.splice(list.indexOf(s), 1);
+          if(s.user.type == "tutor") {
+            io.sockets.emit("removeOnlineTutor", s.user._id);
+          }
+        }
+        else
+          i++;
+      }
     })
   
     socket.on('online', (user)=>{
@@ -30,9 +44,22 @@ const startSocket = (server) =>{
         if (t.socketID === socket.id)
           x = false;
       if (x){
-        listUser.push({socketI: socket.id, user: user});
+        listUser.push({socketID: socket.id, user: user});
+
+        //Send user info to all client if user is tutor
+        if(user !==null && user.type == "tutor") {
+          io.sockets.emit("receiveNewOnlineTutor", user);
+        }
       }
     });
+
+    socket.on('getOnlineTutors', () => {
+      console.log(listUser);
+      const listTutor = listUser.filter(item => {
+        return item.user && item.user.type === "tutor";
+      });
+      io.to(socket.id).emit("receiveOnlineTutors", listTutor);
+    })
   
     socket.on("callToUser", ({ from, to }) => {
       io.to(to).emit("callToUser", {

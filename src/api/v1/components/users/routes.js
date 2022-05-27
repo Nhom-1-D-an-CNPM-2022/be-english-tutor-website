@@ -6,7 +6,6 @@ const userRoutes = express.Router();
 //======================== GET ========================
 userRoutes.get("/get-all", userControllers.getUsers);
 userRoutes.get("/info", verifyToken, userControllers.getInfo);
-userRoutes.get("/get-tutors", userControllers.getTutors);
 
 //======================== POST ========================
 userRoutes.post("/register", userControllers.register);
@@ -18,6 +17,7 @@ userRoutes.post("/login-tutor", userControllers.loginTutor);
 
 //======================== PUT ========================
 userRoutes.put("/update", userControllers.updateUser);
+userRoutes.put("/upgrade", verifyToken, userControllers.upgradeAccount);
 
 //======================== DELETE ========================
 

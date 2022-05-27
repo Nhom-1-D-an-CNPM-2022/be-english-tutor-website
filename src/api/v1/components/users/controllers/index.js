@@ -8,6 +8,7 @@ import register from "./register";
 import updateUser from "./updateUser";
 import getTutors from "./getTutors";
 import loginTutor from "./loginTutor";
+import upgradeAccount from "./upgradeAccount";
 
 export default {
   register,
@@ -20,4 +21,5 @@ export default {
   updateUser,
   getTutors,
   loginTutor,
+  upgradeAccount,
 };
