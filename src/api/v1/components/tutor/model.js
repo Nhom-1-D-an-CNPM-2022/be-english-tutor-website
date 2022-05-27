@@ -22,8 +22,13 @@ const tutorSchema = new mongoose.Schema({
   motivation: String,
   source: String,
   otherPlatforms: Object,
+  demoLesson: Object,
   isSubmitted: Boolean,
-  isApproved: Boolean,
+  status: {
+    type: String,
+    enum: ["reviewed", "approved", "rejected"],
+    default: "reviewed",
+  },
 });
 
 const Tutor = mongoose.model("Tutor", tutorSchema);

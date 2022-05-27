@@ -8,27 +8,16 @@ const updateProfileMedia = async (req, res) => {
   try {
     const tutor = await tutorServices.getOneByUserId(user._id);
 
-    switch (mediaType) {
-      case "picture": {
-        await tutorServices.updateProfileById(tutor._id, {
-          profilePicture: profileMedia,
-        });
-
-        return res.status(200).send({ profilePicture: profileMedia.url });
-      }
-      case "videoIntroduction": {
-        await tutorServices.updateProfileById(tutor._id, {
-          videoIntroduction: profileMedia,
-        });
-
-        return res.status(200).send({ videoIntroduction: profileMedia.url });
-      }
-      default: {
-        break;
-      }
+    if (tutor[mediaType]) {
+      tutorServices.deleteProfileMedia(mediaType, tutor[mediaType].publicId);
     }
+
+    await tutorServices.updateProfileById(tutor._id, {
+      [mediaType]: profileMedia,
+    });
+
+    res.status(200).send({ [mediaType]: profileMedia.url });
   } catch (error) {
-    console.log(error);
     res.status(400).send(parseErrorIntoMessage(error));
   }
 };

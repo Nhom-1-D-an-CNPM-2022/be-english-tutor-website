@@ -6,14 +6,18 @@ const tutorRoutes = express.Router();
 
 //======================== GET ========================
 tutorRoutes.get("/", tutorController.getListTutors);
+tutorRoutes.get(
+  "/get-reviewed-profiles",
+  tutorController.getListReviewedProfiles,
+);
 tutorRoutes.get("/search", tutorController.searchAllTutors);
 tutorRoutes.get("/profile/me", verifyToken, tutorController.getProfileByUserId);
 tutorRoutes.get("/profile/:tutorId", tutorController.getProfile);
-
 //======================== POST ========================
 tutorRoutes.post("/", tutorController.createNewTutor);
 
 //======================== PUT ========================
+tutorRoutes.put("/approve-profile", tutorController.approveProfile);
 tutorRoutes.put("/profile/me", verifyToken, tutorController.updateProfile);
 tutorRoutes.put(
   "/profile/media",

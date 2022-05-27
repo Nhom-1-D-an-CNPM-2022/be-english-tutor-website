@@ -7,7 +7,6 @@ const userRoutes = express.Router();
 //======================== GET ========================
 userRoutes.get("/get-all", userControllers.getUsers);
 userRoutes.get("/info", verifyToken, userControllers.getInfo);
-userRoutes.get("/get-tutors", userControllers.getTutors);
 
 //======================== POST ========================
 userRoutes.post("/register", userControllers.register);

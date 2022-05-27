@@ -6,15 +6,8 @@ const getProfileByUserId = async (req, res) => {
 
   try {
     const tutor = await tutorServices.getOneByUserId(user._id);
-    res.status(200).send({
-      ...tutor._doc,
-      profilePicture: tutor.profilePicture ? tutor.profilePicture.url : "",
-      videoIntroduction: tutor.videoIntroduction
-        ? tutor.videoIntroduction.url
-        : "",
-    });
+    res.status(200).send(tutorServices.toDTO(tutor));
   } catch (error) {
-    console.log(error);
     res.status(400).send(parseErrorIntoMessage(error));
   }
 };
