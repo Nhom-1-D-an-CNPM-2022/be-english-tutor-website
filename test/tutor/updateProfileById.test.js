@@ -1,9 +1,7 @@
 process.env.NODE_ENV = 'test';
 import { expect } from "chai";
 import {faker} from "@faker-js/faker";
-import updateProfileById from "../../src/api/v1/components/tutor/services/updateProfileById";
-import getOne from "../../src/api/v1/components/tutor/services/getOne";
-// import updateCertificatesToCloud from "../../src/api/v1/components/tutor/services/updateCertificatesToCloud";
+import services from "../../src/api/v1/components/tutor/services";
 
 import mongoose from "mongoose";
 
@@ -11,23 +9,23 @@ import mongoose from "mongoose";
 describe('update tutor-profile', async () => {
     it('update tutor-profile with empty information', async () => {
         const _id = mongoose.Types.ObjectId('6276354cdcc949bc9ad6a113');
-        const profileInit = await getOne(_id);
-        await updateProfileById(_id, null);
-        const resulttesting = await getOne(_id);
+        const profileInit = await services.getOne(_id);
+        await services.updateProfileById(_id, null);
+        const resulttesting = await services.getOne(_id);
         //console.log(resulttesting);
         expect(resulttesting).to.deep.include(profileInit);
     })
     
     it('update tutor-profile with empty information', async () => {
         const _id = mongoose.Types.ObjectId('6276354cdcc949bc9ad6a113');
-        const profileInit = await getOne(_id);
-        await updateProfileById(_id, null);
-        const resulttesting = await getOne(_id);
+        const profileInit = await services.getOne(_id);
+        await services.updateProfileById(_id, null);
+        const resulttesting = await services.getOne(_id);
         //console.log(resulttesting);
         expect(resulttesting).to.deep.include(profileInit);
     })
 
-    it('update tutor-profile with basic information', async () =>{
+    it('update tutor-profile with informations', async () =>{
         const updateProfile = {
             displayName: String(faker.name.findName()),
             hometown: String(faker.address.country()),
@@ -58,22 +56,12 @@ describe('update tutor-profile', async () => {
         }
 
         const _id = mongoose.Types.ObjectId('6276354cdcc949bc9ad6a113');
-        await updateProfileById(_id, updateProfile);
-        const resulttesting = await getOne(_id);
+        await services.updateProfileById(_id, updateProfile);
+        const resulttesting = await services.getOne(_id);
         expect(resulttesting).to.deep.include(shouldProfile);
         expect(resulttesting.dateOfBirth.toISOString()).to.equal(updateProfile.dateOfBirth);
     })
 
-    // it('update picture for a tutor', async () => {
-        
-    // })
-    // it('update video intro for a tutor ', async() =>{
-        
-      
-    // })
-    // it('update certificates for a tutor ', async() =>{
-        
-    // })
 
 
 
