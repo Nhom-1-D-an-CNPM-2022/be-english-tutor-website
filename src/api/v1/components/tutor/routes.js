@@ -8,7 +8,7 @@ const tutorRoutes = express.Router();
 tutorRoutes.get("/", tutorController.getListTutors);
 tutorRoutes.get(
   "/get-reviewed-profiles",
-  tutorController.getListReviewedProfiles,
+  tutorController.getListReviewedProfiles
 );
 tutorRoutes.get("/search", tutorController.searchAllTutors);
 tutorRoutes.get("/profile/me", verifyToken, tutorController.getProfileByUserId);
@@ -22,13 +22,14 @@ tutorRoutes.put("/profile/me", verifyToken, tutorController.updateProfile);
 tutorRoutes.put(
   "/profile/media",
   verifyToken,
-  tutorController.updateProfileMedia,
+  tutorController.updateProfileMedia
 );
 tutorRoutes.put(
   "/profile/certificates",
   verifyToken,
-  tutorController.updateCertificates,
+  tutorController.updateCertificates
 );
+tutorRoutes.put("/review", verifyToken, tutorController.updateReviewTutor);
 
 //======================== DELETE ========================
 

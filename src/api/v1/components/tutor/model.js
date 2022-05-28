@@ -24,6 +24,7 @@ const tutorSchema = new mongoose.Schema({
   otherPlatforms: Object,
   demoLesson: Object,
   isSubmitted: Boolean,
+  reviewing: Array,
   status: {
     type: String,
     enum: ["reviewed", "approved", "rejected"],
