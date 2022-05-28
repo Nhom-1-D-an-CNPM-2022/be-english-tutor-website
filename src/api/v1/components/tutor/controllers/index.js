@@ -1,13 +1,14 @@
+import approveProfile from "./approveProfile";
 import createNewTutor from "./createNewTutor";
+import getListReviewedProfiles from "./getListReviewedProfiles";
 import getListTutors from "./getListTutors";
 import getProfile from "./getProfile";
 import getProfileByUserId from "./getProfileByUserId";
-import getListReviewedProfiles from "./getListReviewedProfiles";
 import searchAllTutors from "./searchAllTutors";
 import updateCertificates from "./updateCertificates";
 import updateProfile from "./updateProfile";
 import updateProfileMedia from "./updateProfileMedia";
-import approveProfile from "./approveProfile";
+import updateReviewTutor from "./updateReviewTutor";
 
 export default {
   getListTutors,
@@ -20,4 +21,5 @@ export default {
   updateProfileMedia,
   updateCertificates,
   approveProfile,
+  updateReviewTutor,
 };
