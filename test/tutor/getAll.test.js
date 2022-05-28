@@ -12,18 +12,17 @@ describe('get list tutor in system', async () => {
     connectMongoDB();
     it('get all tutors', async () => {
         const resulttesting = await getAll();
-        // console.log(resulttesting);
-       
+        //console.log(resulttesting);
+
         expect(resulttesting).to.not.be.null;
         expect(resulttesting).to.be.an('array');
-        //David is tutor's dislayName exited in system
-        expect(resulttesting.map(e=>(e.displayName))).to.include("David");
-        //System have 7 tutors in the time runing the test
-        // expect(resulttesting).to.have.lengthOf(7);
-        
+        for (var i = 0; i < resulttesting.length; i++) {
+            expect(resulttesting[i]._id).to.be.a('object');
+        }
+
 
     })
-  
-    
+
+
 
 })
