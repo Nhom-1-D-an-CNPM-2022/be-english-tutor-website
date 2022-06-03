@@ -142,7 +142,7 @@ const startSocket = (server) => {
 
       io.to(message.toSocket)
         .to(message.fromSocket)
-        .emit(SocketEvents.UPDATE_MESSAGE);
+        .emit(SocketEvents.UPDATE_MESSAGE, message);
     });
   });
 };
