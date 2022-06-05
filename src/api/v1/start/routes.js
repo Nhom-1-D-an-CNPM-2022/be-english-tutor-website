@@ -4,6 +4,7 @@ import scheduleRoutes from '../components/schedule/routes';
 import bookingRoutes from '../components/booking/routes';
 import notificationRoutes from '../components/notification/routes';
 import verifyToken from '../middlewares/verifyToken';
+import userFavoriteRoutes from '../components/user_favorites/routes';
 import messageRoutes from '../components/message/routes';
 const startRoutes = (app) => {
   // routes
@@ -12,6 +13,7 @@ const startRoutes = (app) => {
   app.use('/schedule', verifyToken, scheduleRoutes);
   app.use('/booking', verifyToken, bookingRoutes);
   app.use('/notification', verifyToken, notificationRoutes);
+  app.use('/favorites', userFavoriteRoutes);
   app.use('/messages', messageRoutes);
 
   //404
