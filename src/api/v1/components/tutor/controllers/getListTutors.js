@@ -1,5 +1,5 @@
-import parseErrorIntoMessage from '../../../helpers/parseErrorIntoMessage';
-import tutorServices from '../services';
+import parseErrorIntoMessage from "../../../helpers/parseErrorIntoMessage";
+import tutorServices from "../services";
 
 function getNumberOfDays(start, end) {
   const date1 = new Date(start);
@@ -19,17 +19,18 @@ const getListTutors = async (req, res) => {
       const currentDay =
         today.getMonth() +
         1 +
-        '/' +
+        "/" +
         today.getDate() +
-        '/' +
+        "/" +
         today.getFullYear();
       const ageOfAccount = getNumberOfDays(tutor.userId?.createdAt, currentDay);
-
+      const tutorRating = tutorServices.getRating(tutor.reviewing);
       return {
         fullname: tutor.displayName,
         hometown: tutor.hometown,
         introduction: tutor.introduction,
         ageOfAccount: ageOfAccount,
+        rating: tutorRating,
       };
     });
 

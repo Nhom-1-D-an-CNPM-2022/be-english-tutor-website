@@ -5,6 +5,7 @@ import getBookedLesson from "./getBookedLesson";
 import getReservation from "./getReservation";
 import rejectReservation from "./rejectReservation";
 import sendMailToTuTor from "./sendMailToTutor";
+import history from './history';
 
 export default {
     bookLesson,
@@ -14,4 +15,5 @@ export default {
     acceptReservation,
     rejectReservation,
     sendMailToTuTor,
+    history,
 };
