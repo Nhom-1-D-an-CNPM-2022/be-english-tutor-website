@@ -1,5 +1,5 @@
-import parseErrorIntoMessage from '../../../helpers/parseErrorIntoMessage';
-import userFavoriteServices from '../services';
+import parseErrorIntoMessage from "../../../helpers/parseErrorIntoMessage";
+import userFavoriteServices from "../services";
 
 const addFavoriteTutor = async (req, res) => {
   const { user } = req;
@@ -19,8 +19,13 @@ const addFavoriteTutor = async (req, res) => {
 };
 
 function addTutorToFavorites(userFavorites, tutorId) {
-  checkTutorExistence(userFavorites.tutors, tutorId);
-  userFavorites.tutors?.push(tutorId);
+  const tutorIndex = checkTutorExistence(userFavorites.tutors, tutorId);
+
+  if (tutorIndex >= 0) {
+    userFavorites.tutors?.splice(tutorIndex, 1);
+  } else {
+    userFavorites.tutors?.push(tutorId);
+  }
   userFavorites.save();
 }
 
@@ -33,10 +38,10 @@ function createNewAndSaveToDB(user, tutorId) {
 }
 
 function checkTutorExistence(tutors, tutorId) {
-  const foundTutor = tutors?.find((tutor) => tutor._id?.toString() === tutorId);
-  if (foundTutor) {
-    throw new Error('Tutor is already in favorite list');
-  }
+  const foundTutor = tutors?.findIndex(
+    (tutor) => tutor._id?.toString() === tutorId
+  );
+  return foundTutor;
 }
 
 export default addFavoriteTutor;
