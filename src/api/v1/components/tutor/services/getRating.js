@@ -1,9 +1,12 @@
 const getRating = (reviews) => {
-  let sum = 0;
-  reviews.forEach((review) => {
-    sum += review.rating;
-  });
-  const rating = Math.round((sum / reviews.length) * 10) / 10;
-  return rating;
+  if (reviews.length !== 0) {
+    const sumRating = reviews
+      .map((review) => review.rating)
+      .reduce((a, b) => a + b);
+    const rating = Math.round((sumRating / reviews.length) * 10) / 10;
+    return rating;
+  }
+  return null;
 };
+
 export default getRating;

@@ -8,7 +8,7 @@ const updateProfile = async (req, res) => {
     const tutor = await tutorServices.getOneByUserId(user._id);
     const updatedProfile = await tutorServices.updateProfileById(
       tutor._id,
-      req.body,
+      req.body
     );
     res.status(200).send(tutorServices.toDTO(updatedProfile));
   } catch (error) {

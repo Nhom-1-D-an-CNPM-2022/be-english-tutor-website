@@ -1,9 +1,9 @@
-import Tutor from '../model';
+import Tutor from "../model";
 
 const updateProfileById = async (tutorId, updateInformation) => {
   const updatedProfile = await Tutor.findByIdAndUpdate(
     tutorId,
-    updateInformation,
+    updateInformation.data,
     { new: true }
   );
 

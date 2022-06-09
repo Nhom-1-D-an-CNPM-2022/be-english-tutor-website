@@ -31,6 +31,7 @@ const getListTutors = async (req, res) => {
         introduction: tutor.introduction,
         ageOfAccount: ageOfAccount,
         rating: tutorRating,
+        userId: tutor._id,
       };
     });
 
