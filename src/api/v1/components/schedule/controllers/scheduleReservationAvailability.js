@@ -4,8 +4,7 @@ import TutorService from "../../tutor/services";
 
 const scheduleReservationAvailability = async (req, res) => {
   const { user } = req;
-  const { scheduleTime } = req.body;
-
+  const { scheduleTime } = req.body.data;
   try {
     const tutor= await TutorService.getOneByUserId(user._id);
     if(tutor == null) {
@@ -19,10 +18,11 @@ const scheduleReservationAvailability = async (req, res) => {
         interval: item.interval,
       }).save();
     }
-
     res.status(200).send("Schedule reservation successfully");
   } catch (error) {
+    console.log("ERROR", error);
     res.status(400).send(parseErrorIntoMessage(error));
+
   }
 };
 

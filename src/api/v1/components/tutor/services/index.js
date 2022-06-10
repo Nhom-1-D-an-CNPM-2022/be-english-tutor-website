@@ -1,11 +1,15 @@
-import getOne from './getOne';
-import getOneByUserId from './getOneByUserId';
-import searchAllTutors from './searchAllTutors';
-import updateCertificatesToCloud from './updateCertificatesToCloud';
-import updateProfileById from './updateProfileById';
-import createNewTutor from './createNewTutor';
-import getAll from './getAll';
-import getOneAndUpdate from './getOneAndUpdate';
+import createNewTutor from "./createNewTutor";
+import deleteProfileMedia from "./deleteProfileMedia";
+import getAll from "./getAll";
+import getOne from "./getOne";
+import getOneAndUpdate from "./getOneAndUpdate";
+import getOneByUserId from "./getOneByUserId";
+import getRating from "./getRating";
+import searchAllTutors from "./searchAllTutors";
+import toDTO from "./toDTO";
+import updateCertificatesToCloud from "./updateCertificatesToCloud";
+import updateProfileById from "./updateProfileById";
+import updateReviewing from "./updateReviewing";
 
 const tutorServices = {
   searchAllTutors,
@@ -16,6 +20,10 @@ const tutorServices = {
   createNewTutor,
   getAll,
   getOneAndUpdate,
+  deleteProfileMedia,
+  toDTO,
+  updateReviewing,
+  getRating,
 };
 
 export default tutorServices;

@@ -6,7 +6,7 @@ const getProfileByUserId = async (req, res) => {
 
   try {
     const tutor = await tutorServices.getOneByUserId(user._id);
-    res.status(200).send(tutor);
+    res.status(200).send(tutorServices.toDTO(tutor));
   } catch (error) {
     res.status(400).send(parseErrorIntoMessage(error));
   }

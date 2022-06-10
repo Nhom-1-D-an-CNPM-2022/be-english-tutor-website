@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 const verifyToken = (req, res, next) => {
   const authHeader = req.header("Authorization");
   const token = authHeader && authHeader.split(" ")[1];
-  // let token = req.query.jwt || req.body.jwt;
 
   if (token !== undefined) {
     jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
