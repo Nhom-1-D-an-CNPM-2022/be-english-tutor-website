@@ -3,9 +3,9 @@ import tutorServices from "../services";
 
 const updateReviewTutor = async (req, res) => {
   const { user } = req;
-  console.log(user);
+  //console.log(user);
   const { tutorId, comment, rating } = req.body;
-
+  console.log(tutorId, comment, rating);
   try {
     const updateReviewing = await tutorServices.updateReviewing(
       tutorId,
