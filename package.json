@@ -8,7 +8,14 @@
     "start-v1": "nodemon --experimental-specifier-resolution=node ./src/api/v1/index.js",
     "dev": "npm run dev-v1",
     "start": "npm run start-v1",
-    "test": "mocha --experimental-specifier-resolution=node 'test/**/*.js' --timeout 20000 "
+
+    "test": "mocha --experimental-specifier-resolution=node 'test/**/*.js' --timeout 20000 ",
+    
+    "test-watch": "mocha --experimental-specifier-resolution=node -R list -w ./test/**/*.spec.js --timeout 20000",
+    "test-single": "mocha --experimental-specifier-resolution=node --timeout 20000",
+    "test-single-watch": "mocha --experimental-specifier-resolution=node -R list -w --timeout 20000"
+
+
   },
   "keywords": [],
   "author": "",
@@ -20,7 +27,9 @@
     "bcrypt": "^5.0.1",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
+
     "cloudinary": "^1.29.1",
+
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
