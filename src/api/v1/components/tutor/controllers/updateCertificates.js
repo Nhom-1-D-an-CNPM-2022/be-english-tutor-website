@@ -9,7 +9,7 @@ const updateCertificates = async (req, res) => {
     const tutor = await tutorServices.getOneByUserId(user._id);
     const updatedCertificates = await tutorServices.updateCertificatesToCloud(
       tutor._id,
-      certificates
+      certificates,
     );
 
     res.status(200).send(updatedCertificates);
