@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 
 const SALT_ROUNDS = 10;
 
@@ -41,8 +41,19 @@ const userSchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ['tutor', 'student'],
-      default: 'student',
+      enum: ["tutor", "student"],
+      default: "student",
+    },
+    minutesPerDay: {
+      type: Number,
+      enum: [15, 30],
+    },
+    daysPerWeek: {
+      type: Number,
+      enum: [1, 2, 3, 5],
+    },
+    expiredTime: {
+      type: Date,
     },
   },
   {
@@ -70,7 +81,7 @@ userSchema.methods.generateToken = function () {
       },
     },
     process.env.JWT_SECRET,
-    { expiresIn: '1h' }
+    { expiresIn: "1h" }
   );
   return token;
 };
@@ -85,7 +96,7 @@ userSchema.statics.generateToken = function (user) {
       },
     },
     process.env.JWT_SECRET,
-    { expiresIn: '1h' }
+    { expiresIn: "1h" }
   );
 
   const refreshToken = jwt.sign(
@@ -97,19 +108,19 @@ userSchema.statics.generateToken = function (user) {
       },
     },
     process.env.JWT_SECRET,
-    { expiresIn: '30d' }
+    { expiresIn: "30d" }
   );
   return { accessToken, refreshToken };
 };
 
-userSchema.pre('save', async function (next) {
+userSchema.pre("save", async function (next) {
   const user = this;
 
-  if (user.isModified('password')) {
+  if (user.isModified("password")) {
     user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
   }
   next();
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 export default User;

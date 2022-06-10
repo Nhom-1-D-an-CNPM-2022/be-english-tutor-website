@@ -3,11 +3,18 @@ import bookingControllers from "./controllers";
 const bookingRoutes = express.Router();
 
 //======================== GET ========================
-bookingRoutes.get("/list/student", bookingControllers.getBookedLesson);
+bookingRoutes.get("/list/tutee", bookingControllers.getBookedLesson);
+bookingRoutes.get("/list/tutor", bookingControllers.getReservation);
+bookingRoutes.get("/history", bookingControllers.history);
 
 //======================== POST ========================
 bookingRoutes.post("/", bookingControllers.bookLesson);
+bookingRoutes.post("/sendMailToTuTor", bookingControllers.sendMailToTuTor);
+
 //======================== PUT ========================
+bookingRoutes.put("/accept", bookingControllers.acceptReservation);
+bookingRoutes.put("/reject", bookingControllers.rejectReservation);
+
 //======================== DELETE ========================
 bookingRoutes.delete("/", bookingControllers.cancelLesson);
 

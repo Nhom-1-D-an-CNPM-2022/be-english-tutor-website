@@ -1,21 +1,37 @@
 import mongoose from "mongoose";
 
 const tutorSchema = new mongoose.Schema({
-  userId: mongoose.Schema.Types.ObjectId,
-  introduction: String,
-  education: String,
-  experience: String,
-  profession: String,
-  schedule: Date,
-  languages: String,
-  teachingStyles: String,
-  certificates: String,
-  interests: {
-    type: String,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
-  fullname: {
+  displayName: String,
+  hometown: String,
+  dateOfBirth: Date,
+  videoIntroduction: Object,
+  introduction: String,
+  teachingStyles: String,
+  aboutMe: String,
+  languages: Array,
+  experience: Array,
+  education: Array,
+  profession: String,
+  certificates: Array,
+  profilePicture: Object,
+  interests: String,
+  motivation: String,
+  source: String,
+  otherPlatforms: Object,
+  demoLesson: Object,
+  isSubmitted: Boolean,
+  reviewing: Array,
+  status: {
     type: String,
+    enum: ["reviewed", "approved", "rejected"],
+    default: "reviewed",
   },
 });
 
-export default mongoose.model("Tutor", tutorSchema);
+const Tutor = mongoose.model("Tutor", tutorSchema);
+
+export default Tutor;
