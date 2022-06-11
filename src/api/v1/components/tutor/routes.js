@@ -1,5 +1,6 @@
 import express from "express";
 import verifyToken from "../../middlewares/verifyToken";
+import verifyTokenAdmin from "../../middlewares/verifyTokenAdmin";
 import tutorController from "./controllers";
 
 const tutorRoutes = express.Router();
@@ -8,7 +9,7 @@ const tutorRoutes = express.Router();
 tutorRoutes.get("/", tutorController.getListTutors);
 tutorRoutes.get(
   "/get-reviewed-profiles",
-  tutorController.getListReviewedProfiles
+  tutorController.getListReviewedProfiles,
 );
 tutorRoutes.get("/search", tutorController.searchAllTutors);
 tutorRoutes.get("/profile/me", verifyToken, tutorController.getProfileByUserId);
@@ -17,17 +18,26 @@ tutorRoutes.get("/profile/:tutorId", tutorController.getProfile);
 tutorRoutes.post("/", tutorController.createNewTutor);
 
 //======================== PUT ========================
-tutorRoutes.put("/approve-profile", tutorController.approveProfile);
+tutorRoutes.put(
+  "/profile/approve/:id",
+  verifyTokenAdmin,
+  tutorController.approveProfile,
+);
+tutorRoutes.put(
+  "/profile/reject/:id",
+  verifyTokenAdmin,
+  tutorController.rejectProfile,
+);
 tutorRoutes.put("/profile/me", verifyToken, tutorController.updateProfile);
 tutorRoutes.put(
   "/profile/media",
   verifyToken,
-  tutorController.updateProfileMedia
+  tutorController.updateProfileMedia,
 );
 tutorRoutes.put(
   "/profile/certificates",
   verifyToken,
-  tutorController.updateCertificates
+  tutorController.updateCertificates,
 );
 tutorRoutes.put("/review", verifyToken, tutorController.updateReviewTutor);
 
