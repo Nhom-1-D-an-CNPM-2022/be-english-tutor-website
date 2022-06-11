@@ -1,6 +1,8 @@
 const toDTO = tutor => {
+  const tutorDoc = tutor._doc ? tutor._doc : tutor;
+
   return {
-    ...tutor._doc,
+    ...tutorDoc,
     profilePicture: tutor.profilePicture ? tutor.profilePicture.url : "",
     videoIntroduction: tutor.videoIntroduction
       ? tutor.videoIntroduction.url

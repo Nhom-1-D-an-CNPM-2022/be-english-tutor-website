@@ -10,7 +10,14 @@ const getListReviewedProfiles = async (req, res) => {
       isSubmitted: true,
       status: "reviewed",
     });
-    res.status(200).send(listReviewedProfiles);
+    const newList = listReviewedProfiles.map(profile => {
+      const { userId, ...newProfile } = profile._doc;
+      return {
+        ...tutorServices.toDTO(newProfile),
+        email: userId.email,
+      };
+    });
+    res.status(200).send(newList);
   } catch (error) {
     res.status(400).send(parseErrorIntoMessage(error));
   }

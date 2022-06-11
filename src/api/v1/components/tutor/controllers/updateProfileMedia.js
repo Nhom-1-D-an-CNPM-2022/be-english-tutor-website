@@ -13,7 +13,9 @@ const updateProfileMedia = async (req, res) => {
     }
 
     await tutorServices.updateProfileById(tutor._id, {
-      [mediaType]: profileMedia,
+      data: {
+        [mediaType]: profileMedia,
+      },
     });
 
     res.status(200).send({ [mediaType]: profileMedia.url });

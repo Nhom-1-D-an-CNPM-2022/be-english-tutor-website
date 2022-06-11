@@ -10,6 +10,7 @@ import updateProfile from "./updateProfile";
 import updateProfileMedia from "./updateProfileMedia";
 import updateReviewTutor from "./updateReviewTutor";
 import getInfoTutor from "./getInfoTutor";
+import rejectProfile from "./rejectProfile";
 
 export default {
   getListTutors,
@@ -21,7 +22,8 @@ export default {
   updateProfile,
   updateProfileMedia,
   updateCertificates,
-  approveProfile,
   updateReviewTutor,
   getInfoTutor,
+  approveProfile,
+  rejectProfile,
 };

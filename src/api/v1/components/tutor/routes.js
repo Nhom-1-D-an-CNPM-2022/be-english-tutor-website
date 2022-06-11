@@ -7,7 +7,7 @@ const tutorRoutes = express.Router();
 tutorRoutes.get("/", tutorController.getListTutors);
 tutorRoutes.get(
   "/get-reviewed-profiles",
-  tutorController.getListReviewedProfiles
+  tutorController.getListReviewedProfiles,
 );
 tutorRoutes.get("/search", tutorController.searchAllTutors);
 tutorRoutes.get("/profile/me", tutorController.getProfileByUserId);

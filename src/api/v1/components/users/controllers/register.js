@@ -8,7 +8,8 @@ const register = async (req, res) => {
     try {
       userFoundByEmail = await userServices.getOne({ email, isDeleted: false });
     } catch (error) {
-      throw new Error('Email đã tồn tại');
+    } finally {
+      if (userFoundByEmail) throw new Error('Email đã tồn tại');
     }
 
     const newUser = await userServices.createNewUser({
