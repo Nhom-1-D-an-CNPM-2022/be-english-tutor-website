@@ -10,20 +10,21 @@ let user = {
     password: "123456789aA",
 };
 let token;
-let userId;
 let lession = {
     scheduleId: "62826d298311992bb473837c",
     studentRequest: ""
 }
 
-describe("POST book lesson", () => {
+describe("/POST book lesson", () => {
     beforeEach(done => {
-        chai.request(server).post("/users/login").send(user).end((err, res) => {
-            token = res.body.accessToken;
-            userId = res.body.user._id;
-            res.should.have.status(200);
-            done();
-        })
+        chai.request(server)
+            .post("/users/login")
+            .send(user)
+            .end((err, res) => {
+                token = res.body.accessToken;
+                res.should.have.status(200);
+                done();
+            })
     });
 
 

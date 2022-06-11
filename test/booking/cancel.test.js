@@ -13,7 +13,7 @@ let token;
 let userId;
 
 
-describe("DELETE cancel a booked lesson", () => {
+describe("/DELETE cancel a booked lesson", () => {
     beforeEach(done => {
         chai.request(server).post("/users/login").send(user).end((err, res) => {
             token = res.body.accessToken;
@@ -42,7 +42,7 @@ describe("DELETE cancel a booked lesson", () => {
         chai.request(server)
             .post("/booking")
             .set({ Authorization: `Bearer ${token}` })
-            .send(id)
+            .send(bookingId)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
