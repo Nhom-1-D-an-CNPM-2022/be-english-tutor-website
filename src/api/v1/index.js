@@ -29,7 +29,7 @@ connectMongoDB();
 startMiddleware(app);
 
 // Redis
-import "./redis";
+// import "./redis";
 
 // Routes
 startRoutes(app);

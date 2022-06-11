@@ -22,16 +22,10 @@ const whereCondition = (req) => {
   if (tutorId != null) {
     condition = {
       tutor: tutorId,
-      startTime: {
-        $gte: new Date().toISOString(),
-      },
     };
   } else {
     condition = {
-      startTime: {
-        $gte: startTime,
-        $lte: startTime,
-      },
+      startTime: startTime,
       interval: interval,
       isBooked: false,
     };
