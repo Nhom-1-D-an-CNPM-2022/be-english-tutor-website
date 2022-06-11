@@ -15,7 +15,7 @@ describe('parseSearchString', ()=>{
       keys: ['fullname'],
       separator: '+',
     })
-    expect(result).to.not.have.property('id');
+    expect(result).to.not.have.property('_id');
     expect(result).to.be.a('object');
   });
 })
@@ -24,7 +24,7 @@ describe('parseSkipAndLimit', ()=>{
   it("parseSkipAndLimit with null",  () => {
    
     const result = parseSkipAndLimit(null)
-    expect(result).to.not.have.property('id');
+    expect(result).to.not.have.property('_id');
     expect(result).to.be.a('object');
   });
   
@@ -34,14 +34,14 @@ describe('ParseSortQuery', ()=>{
   it('ParseSortQuery with null',  () => {
    
     const result = parseSortQuery(null, null)
-    expect(result).to.not.have.property('id');
+    expect(result).to.not.have.property('_id');
     expect(result).not.to.be.a('string');
   });
 
   it('ParseSortQuery with undifined',  () => {
    
     const result = parseSortQuery('', '')
-    expect(result).to.not.have.property('id');
+    expect(result).to.not.have.property('_id');
     expect(result).not.to.be.a('string');
   });
 })
@@ -57,7 +57,7 @@ describe('Feature Search All Tutor', ()=>{
       order: '',
     }
     const result = searchAllTutors(option);
-    expect(result).to.not.have.property('id');
+    expect(result).to.not.have.property('_id');
     expect(result).not.to.be.a('string');
     expect(result).not.to.be.a('object');
 });
@@ -65,7 +65,7 @@ describe('Feature Search All Tutor', ()=>{
 it('search all tutor with null',  () => {
   const option= null;
   const result = searchAllTutors(option);
-  expect(result).to.not.have.property('id');
+  expect(result).to.not.have.property('_id');
   expect(result).not.to.be.a('string');
   expect(result).not.to.be.a('object');
 });
