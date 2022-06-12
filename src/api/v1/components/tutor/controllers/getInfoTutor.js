@@ -1,18 +1,18 @@
 import parseErrorIntoMessage from "../../../helpers/parseErrorIntoMessage";
-import userServices from "../services";
+import tutorServices from "../services";
 
-const getInfo = async (req, res) => {
+const getInfoTutor = async (req, res) => {
   const { user } = req;
 
   try {
-    const userFoundById = await userServices.getOne({ _id: user._id });
+    const tutorFoundById = await tutorServices.getOneByUserId(user._id);
 
     res.status(200).send({
-      user: userFoundById,
+      tutor: tutorFoundById,
     });
   } catch (error) {
     res.status(400).send(parseErrorIntoMessage(error));
   }
 };
 
-export default getInfo;
+export default getInfoTutor;
