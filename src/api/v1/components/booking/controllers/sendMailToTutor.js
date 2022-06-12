@@ -30,7 +30,7 @@ const sendMailToTuTor = (req, res) => {
                         <p>Hi!</p>
                         <p> Lớp học của bạn có một đăng ký mới</p>
                         <br>
-                        <a href='${apiUrl}'>
+                        <a href='${apiUrl}/tutor/reservation'>
                             <button>xem</button>
                         </a>
                     </div>
