@@ -47,10 +47,10 @@ const startSocket = (server) => {
 
         //Send user info to all client if user is tutor
         if (user !== null && user.type == 'tutor') {
+          user.socketId = socket.id;
           io.sockets.emit('receiveNewOnlineTutor', user);
         }
       }
-      
     });
 
     socket.on('getOnlineTutors', () => {
@@ -61,9 +61,10 @@ const startSocket = (server) => {
       io.to(socket.id).emit('receiveOnlineTutors', listTutor);
     });
 
-    socket.on('callToUser', ({ from, to }) => {
+    socket.on('callToUser', ({ from, to, user }) => {
       io.to(to).emit('callToUser', {
         from,
+        user,
       });
     });
 
@@ -79,7 +80,7 @@ const startSocket = (server) => {
       });
     });
 
-    socket.on('iCallUser', ({ userToCall, signalData, from, name }) => {
+    socket.on('iCallUser', ({ userToCall, signalData, from }) => {
       io.to(userToCall).emit('iCallUser', {
         signal: signalData,
       });
