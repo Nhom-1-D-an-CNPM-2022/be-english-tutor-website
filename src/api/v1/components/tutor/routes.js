@@ -9,6 +9,7 @@ const tutorRoutes = express.Router();
 tutorRoutes.get("/", tutorController.getListTutors);
 tutorRoutes.get(
   "/get-reviewed-profiles",
+  verifyTokenAdmin,
   tutorController.getListReviewedProfiles,
 );
 tutorRoutes.get("/search", tutorController.searchAllTutors);
