@@ -8,10 +8,10 @@ import messageRoutes from "../components/message/routes";
 
 import verifyToken from "../middlewares/verifyToken";
 
-const startRoutes = (app) => {
+const startRoutes = app => {
   // routes
   app.use("/users", userRoutes);
-  app.use("/tutors", verifyToken, tutorRoutes);
+  app.use("/tutors", tutorRoutes);
   app.use("/schedule", verifyToken, scheduleRoutes);
   app.use("/booking", verifyToken, bookingRoutes);
   app.use("/notification", verifyToken, notificationRoutes);
