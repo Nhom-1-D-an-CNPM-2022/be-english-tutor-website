@@ -42,7 +42,7 @@ tutorRoutes.put(
   verifyToken,
   tutorController.updateCertificates,
 );
-tutorRoutes.put("/review", tutorController.updateReviewTutor);
+tutorRoutes.put("/review", verifyToken, tutorController.updateReviewTutor);
 
 //======================== DELETE ========================
 
