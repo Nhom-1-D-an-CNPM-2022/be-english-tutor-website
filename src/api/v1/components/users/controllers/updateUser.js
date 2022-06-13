@@ -1,33 +1,31 @@
-import User from "../model";
+import parseErrorIntoMessage from "../../../helpers/parseErrorIntoMessage";
+import userServices from "../services";
 
-const updateUser = (req, res) => {
-  const { _id, dataUpdate } = req.body;
-  const { fullname, password, isVerified, isActive, isDeleted } = dataUpdate;
+const updateUser = async (req, res) => {
+  try {
+    const { _id, dataUpdate } = req.body;
+    const { fullname, password, isVerified, isActive, isDeleted } = dataUpdate;
 
-  User.findById(_id, async (err, user) => {
-    if (err) {
-      return res.status(400).json({ message: err });
-    }
+    const updatedUser = await userServices.getOneAndUpdate(
+      { _id },
+      {
+        fullname,
+        password,
+        isVerified,
+        isActive,
+        isDeleted,
+      }
+    );
 
-    if (fullname !== "") {
-      user.fullname = fullname;
-    }
-    if (password !== "") {
-      user.password = password;
-    }
-    if (isVerified !== "") {
-      user.isVerified = isVerified;
-    }
-    if (isActive !== "") {
-      user.isActive = isActive;
-    }
-    if (isDeleted !== "") {
-      user.isDeleted = isDeleted;
+    if (updatedUser.message) {
+      res.status(400).send(parseErrorIntoMessage(error));
     }
 
-    user.save();
-    return res.status(200).json(user);
-  });
+    res.status(200).send(updatedUser);
+  } catch (error) {
+    console.log(parseErrorIntoMessage(error));
+    res.status(400).send(parseErrorIntoMessage(error));
+  }
 };
 
 export default updateUser;

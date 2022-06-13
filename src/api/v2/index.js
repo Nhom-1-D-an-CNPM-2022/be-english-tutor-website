@@ -28,15 +28,18 @@ connectMongoDB();
 // Middlewares
 startMiddleware(app);
 
+// Redis
+// import "./redis";
+
 // Routes
 startRoutes(app);
 
 //socket.io
 startSocket(server);
 
-//server.listen(port, () => {
-//  console.log(`Example app listening at http://localhost:${port}`);
-//});
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+server.listen(port, () => {
+ console.log(`Example app listening at http://localhost:${port}`);
 });
+// app.listen(port, () => {
+//   console.log(`Example app listening at http://localhost:${port}`);
+// });

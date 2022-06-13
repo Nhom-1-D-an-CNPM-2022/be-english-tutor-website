@@ -2,7 +2,7 @@ import { ScheduleDao } from "../../infrac/repository/schedule/schedule.dao";
 
 export class Schedule {
     constructor(id, tutor, startTime, interval, isBooked) {
-        this.id = id; 
+        this._id = id; 
         this.tutor = tutor;
         this.startTime = startTime;
         this.interval = interval;

@@ -5,7 +5,7 @@ const notificationRoutes = express.Router();
 //======================== GET ========================
 
 //======================== POST ========================
-notificationRoutes.post("/", notificationControllers.newNotification);
+notificationRoutes.post("/addNotification", notificationControllers.newNotification);
 //======================== PUT ========================
 //======================== DELETE ========================
 

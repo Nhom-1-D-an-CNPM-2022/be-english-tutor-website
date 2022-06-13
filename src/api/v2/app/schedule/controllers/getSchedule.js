@@ -1,4 +1,4 @@
-import { Schedule } from "../../../domain/schedule/schedule.entity"
+import { Schedule } from "../../../domain/schedule/schedule.entity";
 import { QueryTimeSchedule } from "../../../domain/schedule/dto/queryTimeSchedule.dto";
 import { QueryTutorSchedule } from "../../../domain/schedule/dto/queryTutorSchedule.dto";
 import parseErrorIntoMessage from "../../../interfaces/helpers/parseErrorIntoMessage";

@@ -1,13 +1,18 @@
-import User from "../model";
+import parseErrorIntoMessage from "../../../helpers/parseErrorIntoMessage";
+import userServices from "../services";
 
-const getUsers = (req, res) => {
-  User.find({}, (err, users) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({ message: err });
-    }
+const getUsers = async (req, res) => {
+  try {
+    const query = req.query;
+    const number = Number(query.number);
+    const page = Number(query.page);
+
+    const users = await userServices.getAll(number, page);
+
     return res.status(200).send(users);
-  });
+  } catch (error) {
+    res.status(400).send(parseErrorIntoMessage(error));
+  }
 };
 
 export default getUsers;

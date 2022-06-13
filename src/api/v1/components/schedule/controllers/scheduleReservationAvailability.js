@@ -1,23 +1,28 @@
 import parseErrorIntoMessage from "../../../helpers/parseErrorIntoMessage";
 import Schedule from "../model";
+import TutorService from "../../tutor/services";
 
 const scheduleReservationAvailability = async (req, res) => {
   const { user } = req;
-  //tutorId for test (Instead using user._id)
-  const { tutorId, scheduleTime } = req.body;
-
+  const { scheduleTime } = req.body.data;
   try {
+    const tutor= await TutorService.getOneByUserId(user._id);
+    if(tutor == null) {
+        throw new Error("User is inactive as a tutor")
+    }
+        
     for (let item of scheduleTime) {
       await new Schedule({
-        tutor: tutorId,
+        tutor: tutor._id,
         startTime: item.time,
         interval: item.interval,
       }).save();
     }
-
     res.status(200).send("Schedule reservation successfully");
   } catch (error) {
+    console.log("ERROR", error);
     res.status(400).send(parseErrorIntoMessage(error));
+
   }
 };
 
