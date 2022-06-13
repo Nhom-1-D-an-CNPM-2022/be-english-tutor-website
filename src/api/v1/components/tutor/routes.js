@@ -1,7 +1,7 @@
 import express from "express";
 import verifyToken from "../../middlewares/verifyToken";
-import verifyTokenAdmin from "../../middlewares/verifyTokenAdmin";
 import tutorController from "./controllers";
+import verifyTokenAdmin from "../../middlewares/verifyTokenAdmin";
 
 const tutorRoutes = express.Router();
 
