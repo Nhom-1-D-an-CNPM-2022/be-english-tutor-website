@@ -3,6 +3,7 @@ import TutorDao from "../../infrac/repository/tutor/tutor.dao";
 import UserService from "../user/user.service";
 import uploadImg from "../../infrac/cloundinary/uploadImage";
 
+
 export default class TutorService {
     static createNewTutor = async (registerByEmail) => {
         try {
@@ -108,37 +109,35 @@ export default class TutorService {
         }
     }
 
-    static getOneByUserIDAndUpdateProfileMedia = async (userId, certificates) => {
+    static getOneByUserIDAndUpdateProfileMedia = async (userId, mediaType, profileMedia) => {
         try {
-            //Mang certificates duoc upload len cloudinary thanh mang link anh
-            const updatedCertificates = await certificates.map(async (certificate) => {
-                return await uploadImg(certificate.URLFile);
-            });
+            const updatedTutor = await TutorService.getOneByUserIDAndUpdate(user._id, {
+                [mediaType]: profileMedia,
+              });
 
-            return await Promise.all(updatedCertificates)
-                .then(async (links) => {
-                    let certificateUpdated = [];
-                    links.map((link, index) => {
-                        certificateUpdated.push({
-                            url: link,
-                            type: certificates[index].type,
-                            fileName: certificates[index].fileName,
-                        });
-                    });
-
-                    const update = { certificates: certificateUpdated };
-                    await new TutorDao().getOneAndUpdate({userId}, update);
-
-                    return certificateUpdated;
-                })
-                .catch((error) => {
-                    console.log(error);
-                    return error;
-                });
+            if (updatedTutor[mediaType]) {
+                deleteProfileMedia(mediaType, updatedTutor[mediaType].publicId);
+            }
         }
         catch (err) {
             // Error handling logic should go here
-            throw new Error(`Update certificates failed: ${err.message}`);
+            throw new Error(`Update ProfileMedia failed: ${err.message}`);
+        }
+    }
+
+    static addReviewing = async (_id, review) => {
+        try {
+            const tutor = await new TutorDao().findById(_id);
+
+            const newReviewing = tutor.reviewing.push(review);
+            const updatedTutor = await TutorService.getOneByIdAndUpdate(_id, {
+                reviewing: newReviewing,
+            })
+            return updatedTutor
+        }
+        catch (err) {
+            // Error handling logic should go here
+            throw new Error(`Add reviewing failed: ${err.message}`);
         }
     }
 }

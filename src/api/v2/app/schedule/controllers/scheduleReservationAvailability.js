@@ -1,17 +1,22 @@
-import { Schedule } from "../../../domain/schedule/schedule.entity";
-import { CreateSchedule } from "../../../domain/schedule/dto/createSchedule.dto";
+import ScheduleService from "../../../domain/schedule/schedule.service";
+import CreateSchedule from "../../../domain/schedule/dto/createSchedule.dto";
+import TutorService from "../../../domain/tutor/tutor.service";
+import GetOneByUserId from "../../../domain/tutor/dto/getOneByUserId.dto";
 import parseErrorIntoMessage from "../../../interfaces/helpers/parseErrorIntoMessage";
 
 const scheduleReservationAvailability = async (req, res) => {
   const { user } = req;
-  //tutorId for test (Instead using user._id)
-  const { tutorId, scheduleTime } = req.body;
+  const { scheduleTime } = req.body;
 
   try {
+    const getOneById = new GetOneByUserId(user._id);
+
+    const tutor = await TutorService.getOne(getOneById);
+
     for (let item of scheduleTime) {
       let {time, interval} = item;
-      await Schedule.scheduleReservation(
-        new CreateSchedule(tutorId, time, interval)
+      await ScheduleService.scheduleReservation(
+        new CreateSchedule(tutor._id, time, interval)
       );
     }
 

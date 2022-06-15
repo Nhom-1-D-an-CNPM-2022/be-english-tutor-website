@@ -55,7 +55,7 @@ export default class Tutor {
     static mappingFromTutorRepository = async (tutorRepo) => {
         const tutor = new Tutor();
 
-        const keys = Object.keys(user);
+        const keys = Object.keys(tutor);
 
         keys.forEach(key => {
             tutor[key] = tutorRepo.key;

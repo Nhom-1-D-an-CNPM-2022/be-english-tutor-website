@@ -1,12 +1,12 @@
-import {Booking} from "../../../domain/booking/booking.entity";
-import { GetBookedLesson } from "../../../domain/booking/dto/getBookedLesson.dto";
+import BookingService from "../../../domain/booking/booking.entity";
+import GetBookedLesson from "../../../domain/booking/dto/getBookedLesson.dto";
 import parseErrorIntoMessage from "../../../interfaces/helpers/parseErrorIntoMessage";
 
 const getBookedLesson = async (req, res) => {
     const { user } = req;
 
     try {
-        const bookedLessons = await Booking.getBookingByTutee(
+        const bookedLessons = await BookingService.getBookingByTutee(
             new GetBookedLesson(user._id)
         );
 

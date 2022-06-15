@@ -1,4 +1,4 @@
-export class BookLesson {
+export default class BookLesson {
     constructor(tutee, schedule, tuteeRequest) {
         this.setTutee(tutee);
         this.setSchedule(schedule);
@@ -6,16 +6,18 @@ export class BookLesson {
     }
 
     setTutee(tutee) {
-        if(tutee === null || tutee ==="") {
-            throw new Error("Tutee code is invalid");
+        const error = ValidationService.validateId(tutee);
+        if(error != null) {
+            throw new Error(error);
         }
 
         this.tutee = tutee;
     }
 
     setSchedule(schedule) {
-        if(schedule === null || schedule ==="") {
-            throw new Error("Schedule code is invalid");
+        const error = ValidationService.validateId(schedule);
+        if(error != null) {
+            throw new Error(error);
         }
 
         this.schedule = schedule;

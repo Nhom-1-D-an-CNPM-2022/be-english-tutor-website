@@ -1,6 +1,7 @@
-import { ScheduleDao } from "../../infrac/repository/schedule/schedule.dao";
+import TutorService from "../tutor/tutor.service";
+import GetOneById from "../tutor/dto/getOneById.dto";
 
-export class Schedule {
+export default class Schedule {
     constructor(id, tutor, startTime, interval, isBooked) {
         this._id = id; 
         this.tutor = tutor;
@@ -9,69 +10,24 @@ export class Schedule {
         this.isBooked = isBooked;
     }
     
-    getTutor() {
+    agreegateTutor = async () => {
         //Lấy từ Domain tutor
-        // this.tutor = 
-        this.tutor = {
-            name: "A",
-            email: "A@gmail.com"
-        }
+        const getOneById = new GetOneById(this.tutor.toString());
+
+        this.tutor = await TutorService.getOne(getOneById);
     }
 
     static mappingFromScheduleRepository = async (scheduleRepo) => {
-        const schedule = new Schedule(
-            scheduleRepo._id, 
-            scheduleRepo.tutor, 
-            scheduleRepo.startTime, 
-            scheduleRepo.interval,
-            scheduleRepo.isBooked);
+        const schedule = new Schedule();
 
-        schedule.getTutor();
+        const keys = Object.keys(tutor);
+
+        keys.forEach(key => {
+            schedule[key] = scheduleRepo.key;
+        })
+
+        await schedule.agreegateTutor();
         return schedule;
     }
-
-    static getScheduleById = async (_id) => {
-        try {
-            const scheduleCollection = await new ScheduleDao().findById(_id);
-            const schedule = Schedule.mappingFromScheduleRepository(scheduleCollection);
-            return schedule;
-        }
-        catch(err) {
-            // Error handling logic should go here
-            throw new Error(`Get failed: ${err.message}`);
-        }
-    }
-
-    static getScheduleCollections = async (queryCondition) => {
-        try {
-            const scheduleCollections = await new ScheduleDao().findByCondition(queryCondition);
-
-            return scheduleCollections.map(schedule => Schedule.mappingFromScheduleRepository(schedule));
-        }
-        catch(err) {
-            // Error handling logic should go here
-            throw new Error(`Get failed: ${err.message}`);
-        }
-    }
-
-
-    static scheduleReservation = async (createSchedule) => {
-        try {
-            await new ScheduleDao().save(createSchedule);
-        }
-        catch(err) {
-            throw new Error("Schedule reservation failed: " + err.message);
-        }
-    }
-
-    static toggleBookedStatus = async (bookSchedule) => {
-        try {
-            await new ScheduleDao().setIsBooked(bookSchedule._id, bookSchedule.isBooked);
-        }
-        catch(err) {
-            throw new Error("Schedule reservation failed: " + err.message);
-        }
-    }
-
     
 }

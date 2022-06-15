@@ -6,15 +6,9 @@ const updateProfileMedia = async (req, res) => {
   const { mediaType, profileMedia } = req.body;
 
   try {
-    const tutor = await tutorServices.getOneByUserId(user._id);
-
-    if (tutor[mediaType]) {
-      tutorServices.deleteProfileMedia(mediaType, tutor[mediaType].publicId);
-    }
-
-    await tutorServices.updateProfileById(tutor._id, {
+    await TutorService.getOneByUserIDAndUpdate(user._id, {
       [mediaType]: profileMedia,
-    });
+    })
 
     res.status(200).send({ [mediaType]: profileMedia.url });
   } catch (error) {

@@ -1,13 +1,14 @@
 import User from "./user.entity";
 import UserDao from "../../infrac/repository/user/user.dao";
 import GetOneByEmail from "./dto/getOneByEmail.dto";
-import generateToken from "../../../infrac/jwt/generateToken";
+import generateToken from "../../infrac/jwt/generateToken";
 import facebookAccountVerification from "../../infrac/verifications/facebookAccountVerification";
 import googleAccountVerification from "../../infrac/verifications/googleAccountVerification";
 import GetOneByFacebook from "./dto/getOneByFacebook.dto";
 import RegisterByFacebook from "./dto/registerByFacebook.dto";
 import generateUUID from "../../interfaces/helpers/generateUUID";
 import RegisterByGoogle from "./dto/registerByGoogle.dto";
+import BcryptService from "../../infrac/bcrypt/bcryptService";
 
 
 export default class UserService {
@@ -45,7 +46,7 @@ export default class UserService {
                 throw new Error('Email is incorrect');
             }
 
-            const isVerify = await bcrypt.compare(password, userFoundByEmail.password);
+            const isVerify = await BcryptService.comparePassword(password, userFoundByEmail.password);
 
             if (isVerify) {
                 const { accessToken, refreshToken } = generateToken(userFoundByEmail);
@@ -79,7 +80,7 @@ export default class UserService {
                 throw new Error("User is not tutor");
             }
 
-            const isVerify = await bcrypt.compare(password, tutorFoundByEmail.password);
+            const isVerify = await BcryptService.comparePassword(password, tutorFoundByEmail.password);
 
             if (isVerify) {
                 const { accessToken, refreshToken } = generateToken(tutorFoundByEmail);

@@ -1,11 +1,12 @@
-export class getReservation {
+export default class getReservation {
     constructor(tutor) {
         setTutor(tutor);
     }
 
     setTutor(tutor) {
-        if(tutor === null || tutor ==="") {
-            throw new Error("Tutor code is invalid");
+        const error = ValidationService.validateId(tutor);
+        if(error != null) {
+            throw new Error(error);
         }
 
         this.tutor = tutor;

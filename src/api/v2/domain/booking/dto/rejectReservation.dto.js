@@ -1,4 +1,4 @@
-export class RejectReservation {
+export default class RejectReservation {
     constructor(_id, tutorResponse ="") {
         this.setId(_id);
         this.status = "REJECTED";
@@ -6,8 +6,9 @@ export class RejectReservation {
     }
 
     setId(_id) {
-        if(_id === null || _id ==="") {
-            throw new Error("Booking id is invalid");
+        const error = ValidationService.validateId(_id);
+        if(error != null) {
+            throw new Error(error);
         }
 
         this._id = _id;

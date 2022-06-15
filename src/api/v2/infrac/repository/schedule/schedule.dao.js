@@ -1,6 +1,6 @@
 import Schedule from "./schedule.do";
 
-export class ScheduleDao {
+export default class ScheduleDao {
 
     save = async(data) => {
         const schedule = new Schedule(data);

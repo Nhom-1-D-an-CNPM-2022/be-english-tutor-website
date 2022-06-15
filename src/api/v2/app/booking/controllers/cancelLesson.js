@@ -1,5 +1,5 @@
-import {Booking} from "../../../domain/booking/booking.entity";
-import { CancelLesson } from "../../../domain/booking/dto/cancelLesson.dto";
+import BookingService from "../../../domain/booking/booking.entity";
+import CancelLesson from "../../../domain/booking/dto/cancelLesson.dto";
 import parseErrorIntoMessage from "../../../interfaces/helpers/parseErrorIntoMessage";
 
 const cancelLesson = async (req, res) => {
@@ -7,7 +7,7 @@ const cancelLesson = async (req, res) => {
     const { bookingId } = req.body;
 
     try {
-        await Booking.cancelLesson(
+        await BookingService.cancelLesson(
             new CancelLesson(bookingId, user._id)
         );
         

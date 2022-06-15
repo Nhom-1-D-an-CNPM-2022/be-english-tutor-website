@@ -1,8 +1,17 @@
 
 export default class BookSchedule {
     constructor(id, isBooked) {
-        this._id = id;
+        this.setId(_id);
         this.setBooked(isBooked);
+    }
+
+    setId = (_id) => {
+        const error = ValidationService.validateId(_id);
+        if(error != null) {
+            throw new Error(error);
+        }
+
+        this._id = _id;
     }
 
     setBooked(isBooked) {

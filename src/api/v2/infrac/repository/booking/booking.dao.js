@@ -1,6 +1,6 @@
 import Booking from "./booking.do";
 
-export class BookingDao {
+export default class BookingDao {
     save = async(data) => {
         const booking = new Booking(data);
         await booking.save();

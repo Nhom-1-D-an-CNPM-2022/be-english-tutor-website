@@ -1,9 +1,8 @@
 
-export default class CreateSchedule {
-    constructor(tutor, startTime, interval) {
+export default class GetScheduleByTutor {
+    constructor(tutor, startTime) {
         this.setTutor(tutor);
         this.startTime = startTime;
-        this.interval = interval;
     }
 
     setTutor = (tutorId) => {

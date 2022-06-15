@@ -1,13 +1,14 @@
-export class GetBookedLesson {
+export default class GetBookedLesson {
     constructor(tutee) {
         this.setTutee(tutee);
     }
 
     setTutee(tutee) {
-        if(tutee === null || tutee ==="") {
-            throw new Error("Tutee code is invalid");
+        const error = ValidationService.validateId(tutee);
+        if(error != null) {
+            throw new Error(error);
         }
-
+        
         this.tutee = tutee;
     }
 }

@@ -1,5 +1,5 @@
-import {Booking} from "../../../domain/booking/booking.entity";
-import { BookLesson } from "../../../domain/booking/dto/bookLesson.dto";
+import BookingService from "../../../domain/booking/booking.service";
+import BookLesson from "../../../domain/booking/dto/bookLesson.dto";
 import parseErrorIntoMessage from "../../../interfaces/helpers/parseErrorIntoMessage";
 
 const bookLesson = async (req, res) => {
@@ -7,7 +7,7 @@ const bookLesson = async (req, res) => {
     const { scheduleId, tuteeRequest } = req.body;
 
     try {
-        const data = await Booking.bookLesson(
+        const data = await BookingService.bookLesson(
             new BookLesson(user._id, scheduleId, tuteeRequest)
         );
 

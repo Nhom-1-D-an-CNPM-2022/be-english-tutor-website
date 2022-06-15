@@ -1,5 +1,5 @@
-import {Booking} from "../../../domain/booking/booking.entity";
-import { RejectReservation } from "../../../domain/booking/dto/rejectReservation.dto";
+import BookingService from "../../../domain/booking/booking.entity";
+import RejectReservation from "../../../domain/booking/dto/rejectReservation.dto";
 import parseErrorIntoMessage from "../../../interfaces/helpers/parseErrorIntoMessage";
 
 const rejectReservation = async (req, res) => {

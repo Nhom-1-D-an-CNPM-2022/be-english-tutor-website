@@ -1,5 +1,5 @@
 
-export default getNumberOfDays = (start, end) => {
+const getNumberOfDays = (start, end) => {
     const date1 = new Date(start);
     const date2 = new Date(end);
     const oneDay = 1000 * 60 * 60 * 24;
@@ -7,3 +7,4 @@ export default getNumberOfDays = (start, end) => {
     const diffInDays = Math.round(diffInTime / oneDay);
     return diffInDays;
 }
+export default getNumberOfDays;

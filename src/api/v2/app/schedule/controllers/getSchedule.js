@@ -1,16 +1,16 @@
-import { Schedule } from "../../../domain/schedule/schedule.entity";
-import { QueryTimeSchedule } from "../../../domain/schedule/dto/queryTimeSchedule.dto";
-import { QueryTutorSchedule } from "../../../domain/schedule/dto/queryTutorSchedule.dto";
+import ScheduleService from "../../../domain/schedule/schedule.service";
+import GetScheduleByTime from "../../../domain/schedule/dto/getScheduleByTime.dto";
+import GetScheduleByTutor from "../../../domain/schedule/dto/getScheduleByTutor.dto";
 import parseErrorIntoMessage from "../../../interfaces/helpers/parseErrorIntoMessage";
 
 const getSchedule = async (req, res) => {
     try {
         //get Condition by tutor or startTime
         const condition = whereCondition(req);
-        console.log(condition);
-        const data = await Schedule.getScheduleCollections(condition);
 
-        res.status(200).send(data);
+        const listSchedules = await ScheduleService.getSchedules(condition);
+
+        res.status(200).send(listSchedules);
     } catch (error) {
         res.status(400).send(parseErrorIntoMessage(error));
     }
@@ -25,12 +25,12 @@ const whereCondition = (req) => {
     let condition = {};
 
     if(tutorId != null) {
-        condition = new QueryTutorSchedule(tutorId, {
+        condition = new GetScheduleByTime(tutorId, {
             "$gte": new Date().toISOString(),
         });
     }
     else {
-        condition = new QueryTimeSchedule({
+        condition = new GetScheduleByTutor({
             "$gte": startTime,
             "$lte": startTime,
         });

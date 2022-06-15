@@ -1,8 +1,6 @@
-import bcrypt from "bcrypt";
+import BcryptService from "../../bcrypt/bcryptService";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
-
-const SALT_ROUNDS = 10;
 
 const userSchema = new mongoose.Schema(
   {
@@ -117,7 +115,7 @@ userSchema.pre("save", async function (next) {
   const user = this;
 
   if (user.isModified("password")) {
-    user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
+    user.password = await BcryptService.hashPassword(user.password);
   }
   next();
 });

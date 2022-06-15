@@ -1,7 +1,17 @@
+import ValidationService
+ from "../../../infrac/joi-validate/ValidationService";
 export default class GetOneByEmail {
     constructor(email, isDeleted) {
-        this.email = email;
+        this.setEmail(email);
         this.isDeleted = isDeleted;
-        // this.type = type;
+    }
+
+    setEmail = (email) => {
+        const error = ValidationService.validateEmail(email);
+        if(error != null) {
+            throw new Error(error);
+        }
+
+        this.email = email;
     }
 }
