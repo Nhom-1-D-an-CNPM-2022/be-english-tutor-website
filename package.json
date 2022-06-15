@@ -6,7 +6,8 @@
   "scripts": {
     "dev-v1": "nodemon --experimental-specifier-resolution=node ./src/api/v1/index.js",
     "start-v1": "nodemon --experimental-specifier-resolution=node ./src/api/v1/index.js",
-    "dev": "npm run dev-v1",
+    "dev-v2": "nodemon --experimental-specifier-resolution=node ./src/api/v2/index.js",
+    "dev": "npm run dev-v2",
     "start": "npm run start-v1",
     "test": "mocha --experimental-specifier-resolution=node 'test/**/*.js' --timeout 20000 ",
     "test-watch": "mocha --experimental-specifier-resolution=node -R list -w ./test/**/*.spec.js --timeout 20000",
@@ -31,6 +32,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "joi": "^17.6.0",
     "google-protobuf": "^3.20.1",
     "jsonwebtoken": "^8.5.1",
     "minimist": "^1.2.6",
