@@ -1,10 +1,11 @@
 import express from "express";
 import verifyToken from "../../middlewares/verifyToken";
+import verifyTokenAdmin from "../../middlewares/verifyTokenAdmin";
 import userControllers from "./controllers";
 const userRoutes = express.Router();
 
 //======================== GET ========================
-userRoutes.get("/get-all", userControllers.getUsers);
+userRoutes.get("/get-all", verifyTokenAdmin, userControllers.getUsers);
 userRoutes.get("/info", verifyToken, userControllers.getInfo);
 
 //======================== POST ========================
@@ -18,6 +19,7 @@ userRoutes.post("/login-tutor", userControllers.loginTutor);
 //======================== PUT ========================
 userRoutes.put("/update", userControllers.updateUser);
 userRoutes.put("/upgrade", verifyToken, userControllers.upgradeAccount);
+userRoutes.put("/update-account", verifyTokenAdmin, userControllers.updateUser);
 
 //======================== DELETE ========================
 

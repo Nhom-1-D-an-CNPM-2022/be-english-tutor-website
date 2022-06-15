@@ -7,21 +7,12 @@ import mongoose from "mongoose";
 
 
 describe('update tutor-profile', async () => {
+    const _id = mongoose.Types.ObjectId('62760145f15c06269949f488');
     it('update tutor-profile with empty information', async () => {
-        const _id = mongoose.Types.ObjectId('6276354cdcc949bc9ad6a113');
         const profileInit = await services.getOne(_id);
         await services.updateProfileById(_id, null);
         const resulttesting = await services.getOne(_id);
-        //console.log(resulttesting);
-        expect(resulttesting).to.deep.include(profileInit);
-    })
-    
-    it('update tutor-profile with empty information', async () => {
-        const _id = mongoose.Types.ObjectId('6276354cdcc949bc9ad6a113');
-        const profileInit = await services.getOne(_id);
-        await services.updateProfileById(_id, null);
-        const resulttesting = await services.getOne(_id);
-        //console.log(resulttesting);
+        console.log(resulttesting);
         expect(resulttesting).to.deep.include(profileInit);
     })
 
@@ -46,7 +37,7 @@ describe('update tutor-profile', async () => {
         }
 
         const shouldProfile ={
-            _id: mongoose.Types.ObjectId('6276354cdcc949bc9ad6a113'),
+            _id: _id,
             displayName: updateProfile.displayName,
             hometown: updateProfile.hometown,
             introduction: updateProfile.introduction,
@@ -55,7 +46,6 @@ describe('update tutor-profile', async () => {
             languages: updateProfile.languages
         }
 
-        const _id = mongoose.Types.ObjectId('6276354cdcc949bc9ad6a113');
         await services.updateProfileById(_id, updateProfile);
         const resulttesting = await services.getOne(_id);
         expect(resulttesting).to.deep.include(shouldProfile);

@@ -3,7 +3,7 @@ import messageServices from '../components/message/services';
 import SocketEvents from '../constant/socketEvents';
 
 const list = [];
-const listUser = [];
+let listUser = [];
 const startSocket = (server) => {
   const io = new Server(server, {
     cors: {
@@ -14,7 +14,6 @@ const startSocket = (server) => {
 
   io.on('connection', (socket) => {
     list.push({ id: socket.id });
-
     socket.on('disconnect', () => {
       let i = 0;
       while (i < list.length) {
@@ -37,28 +36,35 @@ const startSocket = (server) => {
     socket.on('online', (user) => {
       socket.emit('online', list);
       let x = true;
-      for (let t of listUser) if (t.socketID === socket.id) x = false;
+      for (let i = 0; i <listUser.length; i++) {
+        if (listUser[i].socketID === socket.id) {
+          x = false;
+          listUser[i].user = user;
+        };
+      }
       if (x) {
         listUser.push({ socketID: socket.id, user: user });
 
         //Send user info to all client if user is tutor
         if (user !== null && user.type == 'tutor') {
+          user.socketId = socket.id;
           io.sockets.emit('receiveNewOnlineTutor', user);
         }
       }
     });
 
     socket.on('getOnlineTutors', () => {
-      console.log(listUser);
       const listTutor = listUser.filter((item) => {
         return item.user && item.user.type === 'tutor';
       });
+      
       io.to(socket.id).emit('receiveOnlineTutors', listTutor);
     });
 
-    socket.on('callToUser', ({ from, to }) => {
+    socket.on('callToUser', ({ from, to, user }) => {
       io.to(to).emit('callToUser', {
         from,
+        user,
       });
     });
 
@@ -74,7 +80,7 @@ const startSocket = (server) => {
       });
     });
 
-    socket.on('iCallUser', ({ userToCall, signalData, from, name }) => {
+    socket.on('iCallUser', ({ userToCall, signalData, from }) => {
       io.to(userToCall).emit('iCallUser', {
         signal: signalData,
       });

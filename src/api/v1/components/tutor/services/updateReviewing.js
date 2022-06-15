@@ -1,7 +1,7 @@
 import getOneByUserId from "./getOneByUserId";
-
+import getOne from "./getOne";
 const updateReviewing = async (tutorId, userId, comment, rating) => {
-  const tutor = await getOneByUserId(tutorId);
+  const tutor = await getOne(tutorId);
   const review = {
     userId: userId,
     comment: comment,
