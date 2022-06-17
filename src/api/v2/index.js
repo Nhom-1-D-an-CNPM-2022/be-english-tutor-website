@@ -1,15 +1,14 @@
-import express from "express";
-import connectMongoDB from "./database/mongo";
-import startMiddleware from "./start/middleware";
-import startRoutes from "./start/routes";
-import dotenv from "dotenv";
-import cookieParser from "cookie-parser";
-import startSocket from "./start/socketIo";
-import { createServer } from "http";
-import main from "./grpc/grpc_server";
+import express from 'express';
+import connectMongoDB from './infrac/database/index';
+import startMiddleware from './interfaces/start/middleware';
+import startRoutes from './interfaces/start/routes';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import startSocket from './interfaces/start/socketIo';
+import {createServer} from 'http';
 
 // Environment variables
-dotenv.config({ path: "./src/api/v1/configs/.env" });
+dotenv.config({ path: "./src/api/v2/configs/.env" });
 
 // Init Variables
 const app = express();
@@ -29,20 +28,18 @@ connectMongoDB();
 // Middlewares
 startMiddleware(app);
 
+// Redis
+// import "./redis";
+
 // Routes
 startRoutes(app);
 
 //socket.io
 startSocket(server);
 
-main();
-
 server.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+ console.log(`Example app listening at http://localhost:${port}`);
 });
-
-export default app;
-
 // app.listen(port, () => {
 //   console.log(`Example app listening at http://localhost:${port}`);
 // });
