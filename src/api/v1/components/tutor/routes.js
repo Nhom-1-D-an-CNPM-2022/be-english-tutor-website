@@ -10,12 +10,12 @@ tutorRoutes.get("/", tutorController.getListTutors);
 tutorRoutes.get(
   "/get-reviewed-profiles",
   verifyTokenAdmin,
-  tutorController.getListReviewedProfiles,
+  tutorController.getListReviewedProfiles
 );
 tutorRoutes.get("/search", tutorController.searchAllTutors);
 tutorRoutes.get("/profile/me", verifyToken, tutorController.getProfileByUserId);
 tutorRoutes.get("/profile/:tutorId", tutorController.getProfile);
-tutorRoutes.get("/get-info", tutorController.getInfoTutor);
+tutorRoutes.get("/get-info", verifyToken, tutorController.getInfoTutor);
 
 //======================== POST ========================
 tutorRoutes.post("/", tutorController.createNewTutor);
@@ -24,23 +24,23 @@ tutorRoutes.post("/", tutorController.createNewTutor);
 tutorRoutes.put(
   "/profile/approve/:id",
   verifyTokenAdmin,
-  tutorController.approveProfile,
+  tutorController.approveProfile
 );
 tutorRoutes.put(
   "/profile/reject/:id",
   verifyTokenAdmin,
-  tutorController.rejectProfile,
+  tutorController.rejectProfile
 );
 tutorRoutes.put("/profile/me", verifyToken, tutorController.updateProfile);
 tutorRoutes.put(
   "/profile/media",
   verifyToken,
-  tutorController.updateProfileMedia,
+  tutorController.updateProfileMedia
 );
 tutorRoutes.put(
   "/profile/certificates",
   verifyToken,
-  tutorController.updateCertificates,
+  tutorController.updateCertificates
 );
 tutorRoutes.put("/review", verifyToken, tutorController.updateReviewTutor);
 
