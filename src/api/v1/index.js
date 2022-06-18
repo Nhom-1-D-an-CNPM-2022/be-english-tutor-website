@@ -29,9 +29,6 @@ connectMongoDB();
 // Middlewares
 startMiddleware(app);
 
-// Redis
-// import "./redis";
-
 // Routes
 startRoutes(app);
 
