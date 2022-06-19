@@ -1,4 +1,4 @@
-import Tutor from '../model';
+import Tutor from "../model";
 
 const createNewTutor = async ({ ...tutorInformation }) => {
   const newTutor = new Tutor({ ...tutorInformation });
