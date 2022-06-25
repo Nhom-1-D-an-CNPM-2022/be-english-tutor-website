@@ -114,11 +114,12 @@ describe('createNewUser tutorservices', async ()=>{
         const email = null;
         const password = 'null';
         const type = 'tutor';
+        
         const newUser = await userServices.createNewUser({
           email,
           password,
           type,
-        });
+        });  
     
         const result = await createNewTutor({
           userId: newUser._id,
