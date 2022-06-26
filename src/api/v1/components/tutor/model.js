@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const tutorSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
   },
   displayName: String,
   hometown: String,
@@ -27,11 +27,11 @@ const tutorSchema = new mongoose.Schema({
   reviewing: Array,
   status: {
     type: String,
-    enum: ["reviewed", "approved", "rejected"],
-    default: "reviewed",
+    enum: ['reviewed', 'approved', 'rejected'],
+    default: 'reviewed',
   },
 });
 
-const Tutor = mongoose.model("Tutor", tutorSchema);
+const Tutor = mongoose.model('Tutor', tutorSchema);
 
 export default Tutor;
