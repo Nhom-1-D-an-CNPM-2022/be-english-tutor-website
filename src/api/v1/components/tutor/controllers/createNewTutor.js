@@ -1,8 +1,8 @@
 // import cloudinary from "../../../utils/cloudinary";
 import parseErrorIntoMessage from "../../../helpers/parseErrorIntoMessage";
 import userServices from "../../users/services";
-import tutorServices from "../services";
-import signUpTutoringEventSourcing from "../eventSourcing/signUpTutoring";
+import CreateTutorProfileCommand from "../../../cqrs/commands/CreateTutorProfileCommand";
+import container from "../../../cqrs";
 
 const createNewTutor = async (req, res) => {
   const { email, password } = req.body;
@@ -23,19 +23,26 @@ const createNewTutor = async (req, res) => {
       type,
     });
 
-    await tutorServices.createNewTutor({
-      userId: newUser._id,
+    const command = new CreateTutorProfileCommand({
+      aggregateId: newUser._id,
+      payload: {
+        languages: [],
+        experience: [],
+        education: [],
+        certificates: [],
+        reviewing: [],
+        status: "reviewed",
+      },
     });
 
-    await signUpTutoringEventSourcing.eventBuilders.createdEventBuilder(
-      newUser._id,
-      {
-        userId: newUser._id,
-      },
-    );
+    container.commandBus.send(command.type, command.aggregateId, {
+      payload: command.payload,
+      context: command.context,
+    });
 
     res.status(200).send("Success");
   } catch (error) {
+    console.log(error);
     res.status(400).send(parseErrorIntoMessage(error));
   }
 };

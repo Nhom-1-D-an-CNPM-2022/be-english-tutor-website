@@ -43,8 +43,6 @@ main();
 
 server.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
-
-  // container.commandBus.send("createUser", aggregateId, { payload, context });
 });
 
 export default app;

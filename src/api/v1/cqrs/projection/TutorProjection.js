@@ -11,21 +11,15 @@ class TutorProjection extends AbstractProjection {
   }
 
   async tutorProfileCreated({ aggregateId, payload }) {
-    const { initialProfile } = payload;
-
-    await this._tutorProfileReadModelRepository.createProfile(
-      aggregateId,
-      initialProfile,
-    );
+    await this._tutorProfileReadModelRepository.createProfile(aggregateId, {
+      ...payload,
+    });
   }
 
   async tutorProfileUpdated({ aggregateId, payload }) {
-    const { newInformation } = payload;
-
-    await this._tutorProfileReadModelRepository.updateProfile(
-      aggregateId,
-      newInformation,
-    );
+    await this._tutorProfileReadModelRepository.updateProfile(aggregateId, {
+      ...payload,
+    });
   }
 }
 

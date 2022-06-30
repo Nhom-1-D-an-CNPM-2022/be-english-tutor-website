@@ -1,14 +1,14 @@
 import AbstractMessage from "../AbstractMessage";
 
 class CreateTutorProfileCommand extends AbstractMessage {
-  constructor(
+  constructor({
     payload,
     context,
     aggregateId,
     aggregateVersion,
     sagaId,
     sagaVersion,
-  ) {
+  }) {
     super({
       type: "createTutorProfile",
       payload,

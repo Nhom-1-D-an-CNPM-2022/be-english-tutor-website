@@ -1,6 +1,6 @@
 import parseErrorIntoMessage from "../../../helpers/parseErrorIntoMessage";
-import tutorServices from "../services";
-import signUpTutoringEventSourcing from "../eventSourcing/signUpTutoring";
+import UpdateTutorProfileCommand from "../../../cqrs/commands/UpdateTutorProfileCommand";
+import container from "../../../cqrs";
 
 const updateProfile = async (req, res) => {
   const { user } = req;
@@ -12,14 +12,18 @@ const updateProfile = async (req, res) => {
     //   req.body,
     // );
     // res.status(200).send(tutorServices.toDTO(updatedProfile));
-    await signUpTutoringEventSourcing.eventBuilders.updatedEventBuilder(
-      user._id,
-      {
+
+    const command = new UpdateTutorProfileCommand({
+      aggregateId: user._id,
+      payload: {
         ...req.body.data,
       },
-    );
+    });
 
-    signUpTutoringEventSourcing.backgroundProcess(user._id);
+    container.commandBus.send(command.type, command.aggregateId, {
+      payload: command.payload,
+      context: command.context,
+    });
 
     res.status(200).send({
       ...req.body.data,

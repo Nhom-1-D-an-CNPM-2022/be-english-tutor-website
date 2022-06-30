@@ -13,10 +13,8 @@ class TutorAggregate extends AbstractAggregate {
   }
 
   createTutorProfile(payload) {
-    const { initialProfile } = payload;
-
     this.emit("tutorProfileCreated", {
-      initialProfile,
+      ...payload,
     });
   }
 
