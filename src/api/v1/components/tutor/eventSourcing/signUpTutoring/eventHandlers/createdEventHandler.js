@@ -9,7 +9,7 @@ const defaultTutorProfile = {
 
 const createdEventHandler = async metadata => {
   return {
-    defaultTutorProfile,
+    ...defaultTutorProfile,
     ...metadata,
   };
 };
