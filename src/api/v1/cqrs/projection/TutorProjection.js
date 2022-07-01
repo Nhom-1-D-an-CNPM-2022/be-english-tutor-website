@@ -74,7 +74,7 @@ class TutorProjection extends AbstractProjection {
     return tutorProfile;
   }
 
-  async tutorProfileUpdated({ aggregateId, payload }) {
+  async tutorProfileUpdated({ aggregateId }) {
     const newestTutorProfile = await this._generateTutorProfileFromEvents(
       aggregateId,
     );
