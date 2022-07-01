@@ -22,7 +22,6 @@ const login = async (req, res) => {
         path: "/",
         sameSite: "strict",
       });
-      console.log(refreshToken);
 
       res.status(200).send({
         user: userFoundByEmail,

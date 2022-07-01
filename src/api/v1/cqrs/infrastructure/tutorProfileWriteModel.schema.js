@@ -1,17 +1,12 @@
 import mongoose from "mongoose";
 
-const tutorProfileWriteModelSchema = new mongoose.Schema(
-  {
-    aggregateId: String,
-    aggregateVersion: Number,
-    type: String,
-    payload: Object,
-    context: Object,
-  },
-  {
-    timestamps: true,
-  },
-);
+const tutorProfileWriteModelSchema = new mongoose.Schema({
+  aggregateId: String,
+  aggregateVersion: Number,
+  type: String,
+  payload: Object,
+  context: Object,
+});
 
 const TutorProfileWriteModel = mongoose.model(
   "signUpTutoringEventLog",

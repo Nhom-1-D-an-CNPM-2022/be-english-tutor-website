@@ -6,13 +6,6 @@ const updateProfile = async (req, res) => {
   const { user } = req;
 
   try {
-    // const tutor = await tutorServices.getOneByUserId(user._id);
-    // const updatedProfile = await tutorServices.updateProfileById(
-    //   tutor._id,
-    //   req.body,
-    // );
-    // res.status(200).send(tutorServices.toDTO(updatedProfile));
-
     const command = new UpdateTutorProfileCommand({
       aggregateId: user._id,
       payload: {
