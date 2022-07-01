@@ -1,3 +1,4 @@
+// Source: https://github.com/snatalenko/node-cqrs-mongo
 import co from "co";
 
 /**

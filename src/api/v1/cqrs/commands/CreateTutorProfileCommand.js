@@ -1,17 +1,11 @@
 import AbstractMessage from "../AbstractMessage";
+import TutorAggregate from "../domain/TutorAggregate";
 
 class CreateTutorProfileCommand extends AbstractMessage {
-  constructor({
-    payload,
-    context,
-    aggregateId,
-    aggregateVersion,
-    sagaId,
-    sagaVersion,
-  }) {
+  constructor({ context, aggregateId, aggregateVersion, sagaId, sagaVersion }) {
     super({
       type: "createTutorProfile",
-      payload,
+      payload: TutorAggregate.initialTutorProfile,
       context,
       aggregateId,
       aggregateVersion,

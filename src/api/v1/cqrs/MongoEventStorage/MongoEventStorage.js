@@ -1,3 +1,5 @@
+// Source: https://github.com/snatalenko/node-cqrs-mongo
+
 import mongoose from "mongoose";
 import co from "co";
 import ConcurrencyError from "./ConcurrencyError";

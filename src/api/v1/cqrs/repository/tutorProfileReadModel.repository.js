@@ -7,7 +7,7 @@ const createProfile = async (aggregateId, initialProfile) => {
       ...initialProfile,
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -22,7 +22,7 @@ const updateProfile = async (aggregateId, newInformation) => {
       },
     );
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -34,7 +34,7 @@ const getProfile = async aggregateId => {
 
     return profile;
   } catch (err) {
-    console.log(err);
+    return null;
   }
 };
 

@@ -5,6 +5,15 @@ class TutorAggregate extends AbstractAggregate {
     return ["createTutorProfile", "updateTutorProfile"];
   }
 
+  static initialTutorProfile = {
+    languages: [],
+    experience: [],
+    education: [],
+    certificates: [],
+    reviewing: [],
+    status: "reviewed",
+  };
+
   constructor({ id, events }) {
     super({
       id,

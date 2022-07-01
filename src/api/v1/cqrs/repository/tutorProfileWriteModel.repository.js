@@ -1,17 +1,14 @@
 import TutorProfileWriteModel from "../infrastructure/tutorProfileWriteModel.schema";
 
-const getEvents = async (aggregateId, lastUpdatedTimeStamp) => {
+const getEvents = async aggregateId => {
   try {
     const events = await TutorProfileWriteModel.find({
       aggregateId,
-      createdAt: {
-        $gt: lastUpdatedTimeStamp,
-      },
     });
 
     return events;
   } catch (err) {
-    console.log(err);
+    return null;
   }
 };
 

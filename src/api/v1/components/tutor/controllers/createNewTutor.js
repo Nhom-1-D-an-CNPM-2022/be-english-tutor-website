@@ -24,15 +24,7 @@ const createNewTutor = async (req, res) => {
     });
 
     const command = new CreateTutorProfileCommand({
-      aggregateId: newUser._id,
-      payload: {
-        languages: [],
-        experience: [],
-        education: [],
-        certificates: [],
-        reviewing: [],
-        status: "reviewed",
-      },
+      aggregateId: newUser._id.toString(),
     });
 
     container.commandBus.send(command.type, command.aggregateId, {
@@ -42,7 +34,6 @@ const createNewTutor = async (req, res) => {
 
     res.status(200).send("Success");
   } catch (error) {
-    console.log(error);
     res.status(400).send(parseErrorIntoMessage(error));
   }
 };

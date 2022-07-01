@@ -1,3 +1,5 @@
+// Source: https://github.com/snatalenko/node-cqrs-mongo
+
 const DEFAULT_MESSAGE = "event is not unique";
 
 class ConcurrencyError extends Error {
