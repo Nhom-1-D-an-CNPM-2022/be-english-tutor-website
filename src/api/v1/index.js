@@ -7,7 +7,6 @@ import cookieParser from "cookie-parser";
 import startSocket from "./start/socketIo";
 import { createServer } from "http";
 import main from "./grpc/grpc_server";
-import container from "./cqrs";
 
 // Environment variables
 dotenv.config({ path: "./src/api/v1/configs/.env" });

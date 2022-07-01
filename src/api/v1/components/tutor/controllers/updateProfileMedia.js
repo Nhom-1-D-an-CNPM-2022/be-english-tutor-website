@@ -1,6 +1,6 @@
 import parseErrorIntoMessage from "../../../helpers/parseErrorIntoMessage";
-import signUpTutoringEventSourcing from "../eventSourcing/signUpTutoring";
-import tutorServices from "../services";
+import UpdateTutorProfileCommand from "../../../cqrs/commands/UpdateTutorProfileCommand";
+import container from "../../../cqrs";
 
 const updateProfileMedia = async (req, res) => {
   const { user } = req;
@@ -19,14 +19,17 @@ const updateProfileMedia = async (req, res) => {
     //   },
     // });
 
-    await signUpTutoringEventSourcing.eventBuilders.updatedEventBuilder(
-      user._id,
-      {
+    const command = new UpdateTutorProfileCommand({
+      aggregateId: user._id,
+      payload: {
         [mediaType]: profileMedia,
       },
-    );
+    });
 
-    signUpTutoringEventSourcing.backgroundProcess(user._id);
+    container.commandBus.send(command.type, command.aggregateId, {
+      payload: command.payload,
+      context: command.context,
+    });
 
     res.status(200).send({ [mediaType]: profileMedia.url });
   } catch (error) {

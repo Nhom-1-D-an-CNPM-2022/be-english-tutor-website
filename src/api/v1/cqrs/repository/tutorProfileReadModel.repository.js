@@ -20,6 +20,7 @@ const updateProfile = async (aggregateId, newInformation) => {
       {
         ...newInformation,
       },
+      { upsert: true, new: true, setDefaultsOnInsert: true },
     );
   } catch (err) {
     console.error(err);
